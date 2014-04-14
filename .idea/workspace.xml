@@ -1,7 +1,417 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cc8c40ab-d7a4-4002-85db-3d18ff37e84c" name="Default" comment="" />
+    <list default="true" id="cc8c40ab-d7a4-4002-85db-3d18ff37e84c" name="Default" comment="All up to mean subtraction in Eigenface&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/1.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/10.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/2.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/3.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/4.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/5.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/6.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/7.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/8.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s1/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s10/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s11/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s12/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s13/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s14/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s15/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s16/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s17/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s18/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s19/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s2/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s20/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s21/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s22/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s23/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s24/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s25/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s26/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s27/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s28/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s29/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s3/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s30/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s31/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s32/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s33/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s34/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s35/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s36/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s37/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s38/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s39/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s4/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s40/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s5/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s6/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s7/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s8/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/s9/9.pgm" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/Eigenface.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/README" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/eigenface.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/facedata.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/test.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/faces/train.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="VoiceVerificator.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -55,23 +465,7 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java" line="13" class="PMBPI.Voice.Microphone" package="PMBPI.Voice">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -90,10 +484,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Microphone.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Microphone.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="31" selection-start="234" selection-end="234" vertical-scroll-proportion="0.23152709" vertical-offset="57" max-vertical-offset="990">
+            <state line="21" column="5" selection-start="590" selection-end="590" vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="990">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FaceMain.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="21" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Eigenface.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2304">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,14 +528,41 @@
       <list>
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1431" />
-    <option name="y" value="24" />
-    <option name="width" value="1615" />
-    <option name="height" value="1026" />
+    <option name="x" value="64" />
+    <option name="y" value="-1" />
+    <option name="width" value="1303" />
+    <option name="height" value="770" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Internationalization issues</id>
+          </State>
+          <State>
+            <id>Performance issues</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -132,7 +571,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -151,7 +590,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -198,13 +636,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Voice" />
+              <option name="myItemId" value="PMBPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VoiceVerificator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VoiceVerificator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PMBPI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Face" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -219,14 +680,14 @@
     <property name="dynamic.classpath" value="false" />
     <property name="SearchEverywhereHistory" value="" />
     <property name="FullScreen" value="false" />
-    <property name="options.lastSelected" value="project.propVCSSupport.Confirmation" />
+    <property name="options.lastSelected" value="editor" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="PMBPI.Face.FaceMain" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -235,9 +696,15 @@
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="VoiceVerificator" />
+      <module name="QProject" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -275,19 +742,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -313,6 +767,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -414,32 +881,32 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1431" y="24" width="1615" height="1026" extended-state="6" />
-    <editor active="false" />
+    <frame x="64" y="-1" width="1303" height="770" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32948583" sideWeight="0.4996904" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22354695" sideWeight="0.49961567" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32948583" sideWeight="0.5003096" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39940387" sideWeight="0.57878554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935917" sideWeight="0.50038433" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32935917" sideWeight="0.49961567" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21609907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32948583" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1498847" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32935917" sideWeight="0.49961567" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32948583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -455,7 +922,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Trying to commit from idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trying to commit from idea" />
+    <MESSAGE value="All up to mean subtraction in Eigenface&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="All up to mean subtraction in Eigenface&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -467,6 +935,20 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="23" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="828">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="29" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="23" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
           <folding />
         </state>
@@ -475,9 +957,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="31" selection-start="234" selection-end="234" vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -491,9 +971,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="30" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -507,9 +985,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="25" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -523,9 +999,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="35" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -539,9 +1013,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="43" selection-start="1100" selection-end="1100" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="990">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -555,9 +1027,7 @@
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="32" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="465">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -570,7 +1040,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="31" selection-start="234" selection-end="234" vertical-scroll-proportion="0.23152709" vertical-offset="57" max-vertical-offset="990">
+        <state line="21" column="5" selection-start="590" selection-end="590" vertical-scroll-proportion="0.0" vertical-offset="229" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="21" selection-start="188" selection-end="188" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2304">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
