@@ -6,10 +6,8 @@ import java.io.*;
 import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
 
-import org.apache.commons.math3.linear.EigenDecomposition;
-import org.apache.commons.math3.linear.MatrixUtils;
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.RealVector;
+import org.apache.commons.math3.geometry.Vector;
+import org.apache.commons.math3.linear.*;
 
 /**
  * Created by egor on 4/14/14.
@@ -18,15 +16,21 @@ public class Eigenface {
 
     private int[][] sampleMatrix;
 
-    public static int[][] readFaces(int[] nums) {
-        int[][] matr = new int[nums.length][];
+    public static int[][] readFaces(int[] nums, int[] fs) {
+        int[][] matr = new int[nums.length * fs.length][];
+        int k = 0;
         for (int i = 0; i < nums.length; i++) {
-            matr[i] = readFace("faces/s" + nums[i] + "/1.pgm");
+            for (int j = 0; j < fs.length; j++) {
+                matr[k] = readFace("faces/s" + nums[i] + "/" + fs[j] + ".pgm");
+                k++;
+            }
         }
         return matr;
     }
+
     public static void localMain(int[] nums) {
-        int [][] matr = readFaces(nums);
+        int[] f = {1, 2};
+        int[][] matr = readFaces(nums, f);
         int[] mean = calcMean(matr);
         subtractMean(matr, mean);
         try {
@@ -39,32 +43,135 @@ public class Eigenface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        long [][] C = matrixMult(matr, transpose(matr));
+        int[][] C = matrixMult(matr, transpose(matr));
+        RealMatrix cc = toRealMatrix(C);
+        double[] eigenvalues = getEigenvalues(cc);
+        RealVector[] eigenvectorsPre = getEigenvectors(cc);
+        RealMatrix covarianceMatrix = MatrixUtils.createRealDiagonalMatrix(eigenvalues);
+        double[][] eigenvectors = new double[matr.length][];
 
-        RealVector[] eigenvectors = getEigenvectors(C);
-
-
-    }
-
-    public static RealVector[] getEigenvectors(long[][] matr) {
-        double[] vect;
-        RealVector[] vects = new RealVector[matr.length];
-        double[][] matrix = new double[matr.length][matr[0].length];
+        RealMatrix rm = toRealMatrix(matr);
         for (int i = 0; i < matr.length; i++) {
-            for (int j = 0; j < matr[0].length; j++) {
-                matrix[i][j] = matr[i][j];
+            //eigenvectors[i] = multVectByScalar(rm.preMultiply(eigenvectorsPre[i].toArray()), (1 / Math.sqrt(eigenvalues[i])));
+            eigenvectors[i] = rm.preMultiply(eigenvectorsPre[i].toArray());
+        }
+
+        for (int i = 0; i < eigenvectors.length; i ++) {
+            int [] intv = new int[eigenvectors[i].length];
+            for (int j = 0; j < intv.length; j++) {
+                intv[j] = (int)eigenvectors[i][j];
+            }
+            try {
+                writeToPGM(intv, 92, 112, "faces/eig"+i+".pgm");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        RealMatrix rm = MatrixUtils.createRealMatrix(matrix);
+        double[][] weights = new double[rm.getRowDimension()][nums.length*f.length];
+        for (int i = 0; i < rm.getRowDimension(); i++) {
+            for (int j = 0; j < nums.length*f.length; j++) {
+                weights[j][i] = multVectors(eigenvectors[j], rm.getRow(i));
+            }
+        }
+        weights = transpose(weights);
+        int[] n = {22, 32, 30, 7, 16, 35};
+        int[] fs = {3, 4, 5, 6};
+        //EigenDecomposition ed = new EigenDecomposition(rm);
+
+        cc = new LUDecomposition(cc).getSolver().getInverse();
+        double[][] res = recognize(n, fs, weights, eigenvectors, mean, cc);
+        System.out.print("\n Our Result \n");
+        for (int i = 0; i < res.length; i++) {
+            if (i % 4 == 0)
+                System.out.print("\n");
+            for (int j = 0; j < res[j].length; j++) {
+                System.out.print(res[i][j] + " ");
+            }
+
+            System.out.print("\n");
+        }
+    }
+
+    private static double[][] recognize(int[] nums, int[] fs, double[][] W, double[][] U, int[] M, RealMatrix covarianceMatr) {
+        int[][] I = readFaces(nums, fs);
+        subtractMean(I, M);
+        double[][] ret = new double[I.length][2];
+        for (int i = 0; i < I.length; i++) {
+            double[] FI = new double[I[0].length];
+            for (int j = 0; j < I[i].length; j++)
+                FI[j] = I[i][j];
+            double[] w = new double[W.length];
+            for (int j = 0; j < W.length; j++)
+                w[j] = multVectors(U[j], FI);
+            double[] d = new double[w.length];
+
+            for (int j = 0; j < w.length; j++) {
+                /*RealVector r1 = new ArrayRealVector(w);
+                RealVector r2 = new ArrayRealVector(W[j]);
+
+                d[j] = r1.getDistance(r2);*/
+                double [] subVect = new double[w.length];
+                for (int k = 0; k < subVect.length; k ++)
+                    subVect[k] = w[k] - W[j][k];
+                double[] first = covarianceMatr.preMultiply(subVect);
+                d[j] = Math.sqrt(Math.sqrt(multVectors(first, subVect)));
+            }
+            RealVector r = new ArrayRealVector(d);
+
+            ret[i][0] = r.getMinValue();
+            ret[i][1] = r.getMinIndex();
+        }
+        return ret;
+    }
+    private static double [] multVectByScalar(double[] vec, double scalar) {
+        double [] res = new double[vec.length];
+        for (int i = 0; i < vec.length; i ++) {
+            res [i] = vec[i]*scalar;
+        }
+        return res;
+    }
+    public static RealVector[] getEigenvectors(RealMatrix rm) {
+
+        RealVector[] vects = new RealVector[rm.getRowDimension()];
 
         EigenDecomposition f = new EigenDecomposition(rm);
-        double [] vals = new double[matr.length];
-        for (int i = 0; i < matr.length; i ++) {
+        double[] vals = new double[rm.getRowDimension()];
+        for (int i = 0; i < rm.getColumnDimension(); i++) {
             vects[i] = f.getEigenvector(i);
             vals[i] = f.getRealEigenvalue(i);
         }
         return vects;
     }
+    private static double[] getEigenvalues(RealMatrix rm) {
+
+        EigenDecomposition f = new EigenDecomposition(rm);
+        double[] vals = new double[rm.getRowDimension()];
+        for (int i = 0; i < rm.getColumnDimension(); i++) {
+            vals[i] = f.getRealEigenvalue(i);
+        }
+        return vals;
+    }
+
+    private static double multVectors(double[] a, double[] b) {
+        double res = 0;
+        for (int i = 0; i < a.length; i++) {
+            res += a[i] * b[i];
+        }
+        return res;
+    }
+
+    private static RealMatrix toRealMatrix(int[][] m) {
+        RealMatrix r;
+        double d[][] = new double[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                d[i][j] = m[i][j];
+            }
+        }
+        r = MatrixUtils.createRealMatrix(d);
+        return r;
+    }
+
 
     private static int[] calcMean(int[][] arr) {
         int[] avg = new int[arr[0].length];
@@ -87,11 +194,11 @@ public class Eigenface {
         }
     }
 
-    public static long[][] matrixMult(int[][] a, int[][] b) {
+    public static int[][] matrixMult(int[][] a, int[][] b) {
         int m = a.length;
         int n = b.length;
         int l = b[0].length;
-        long[][] res = new long[m][m];
+        int[][] res = new int[m][m];
         int tmp = 0;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < l; j++) {
@@ -105,8 +212,20 @@ public class Eigenface {
         return res;
     }
 
+//    private static double[] multiplyByRow()
+
     public static int[][] transpose(int[][] a) {
         int[][] T = new int[a[0].length][a.length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                T[j][i] = a[i][j];
+            }
+        }
+        return T;
+    }
+
+    public static double[][] transpose(double[][] a) {
+        double[][] T = new double[a[0].length][a.length];
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
                 T[j][i] = a[i][j];

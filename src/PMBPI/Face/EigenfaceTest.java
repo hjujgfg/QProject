@@ -17,7 +17,7 @@ public class EigenfaceTest extends TestCase {
         int [][] a = {{1, 2, 3}, {4, 5, 6}};
         int [][] b = {{2, 3}, {4, 5}, {6, 7}};
         int [][] exp = {{28, 34}, {64, 79}};
-        long [][] res = Eigenface.matrixMult(a, b);
+        int [][] res = Eigenface.matrixMult(a, b);
         for (int i = 0; i < exp.length; i ++) {
             for (int j = 0; j < exp[0].length; j ++) {
                 assertEquals("werg", exp[i][j], res[i][j]);

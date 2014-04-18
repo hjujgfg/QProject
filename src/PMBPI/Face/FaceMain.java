@@ -5,7 +5,7 @@ package PMBPI.Face;
  */
 public class FaceMain {
     public static void main(String[] args) {
-        int[] nums = {22, 32, 30, 7};
+        int[] nums = {22, 32, 30, 7, 12};
         Eigenface.localMain(nums);
 
         //new NativeComputations().sayHello();
