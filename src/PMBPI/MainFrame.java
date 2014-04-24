@@ -2,14 +2,20 @@ package PMBPI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import PMBPI.Face.Eigenface;
+import PMBPI.Face.PGMReaderAlt;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamDevice;
 import com.github.sarxos.webcam.WebcamPanel;
@@ -24,49 +30,156 @@ public class MainFrame extends JFrame{
     private JPanel rootPanel;
     private JButton openButton;
     private JPanel ImagePanel;
-    private JLabel imageLabel;
-
+    private JPanel PrevMainPanel;
+    private JButton addTrainigBtn;
+    private JButton identifyBtn;
+    private JButton addTestBtn;
+    private JPanel testPanel;
+    private JTextPane textPane1;
+    private JTable ImageTable;
+    Webcam webcam;
+    ArrayList<PreviewPanel> training;
+    ArrayList<PreviewPanel> testing;
     public MainFrame() {
         super("PMBPI Project");
         setContentPane(rootPanel);
         pack();
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        training = new ArrayList<PreviewPanel>();
+        testing = new ArrayList<PreviewPanel>();
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         BasicConfigurator.configure();
         final Dimension size = WebcamResolution.QVGA.getSize();
 
-        openButton.addActionListener(new ActionListener() {
+        //panel.start();
+        //PrevMainPanel.setLayout(new BoxLayout(PrevMainPanel, BoxLayout.PAGE_AXIS));
+        //PrevMainPanel.add(Box.createRigidArea(new Dimension(2, 0)));
+        PrevMainPanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        //PrevMainPanel.add(ImageTable);
+        PrevMainPanel.setLayout(new GridBagLayout());
+        testPanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        testPanel.setLayout(new GridBagLayout());
+        ImagePanel.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ImagePanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.NONE;
+        c.weightx = 1;
+
+        //PrevMainPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
+        setVisible(true);
+
+        //WebCamFrame webCamFrame = new WebCamFrame();
+
+        addTrainigBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //JOptionPane.showConfirmDialog(MainFrame.this, "Opened");
-                Webcam webcam = Webcam.getDefault();
-                WebcamPanel panel = new WebcamPanel(webcam, size, true);
-                ImagePanel.add(panel);
-                //panel.start();
-                //webcam.setViewSize(new Dimension(1024,768));
-
-                //webcam.open(false);
-
-
-                // get image
-                BufferedImage image = webcam.getImage();
-
-                // save image to PNG file
-                try {
-                    ImageIO.write(image, "PNG", new File("test.png"));
-                    ImageIcon icon = new ImageIcon("test.png");
-                    imageLabel.setIcon(icon);
-                    webcam.close();
-
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                JFileChooser fileopen = new JFileChooser("faces/");
+                int ret = fileopen.showDialog(null, "Открыть файл");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
+                    PreviewPanel p = new PreviewPanel(file);
+                    training.add(p);
+                    PrevMainPanel.add(p);
                 }
             }
         });
-        setVisible(true);
+        addTestBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileopen = new JFileChooser("faces/");
+                int ret = fileopen.showDialog(null, "Открыть файл");
+                if (ret == JFileChooser.APPROVE_OPTION) {
+                    File file = fileopen.getSelectedFile();
+                    PreviewPanel p = new PreviewPanel(file);
+                    testing.add(p);
+                    testPanel.add(p);
+                    testPanel.invalidate();
+                }
+            }
+        });
+        identifyBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                File[] testFiles = new File[testing.size()];
+                int  i = 0;
+                for (PreviewPanel p : testing) {
+                    testFiles[i] = p.pathToImage;
+                    i++;
+                }
+                File[] trainingFiles = new File[training.size()];
+                i = 0;
+                for (PreviewPanel p : training) {
+                    trainingFiles[i] = p.pathToImage;
+                    i ++;
+                }
+                int[][] trainingMatrix = Eigenface.readFaces(trainingFiles);
+                int[][] testingMatrix = Eigenface.readFaces(testFiles);
+                double [][] result = Eigenface.localMain(trainingMatrix, testingMatrix);
+                for (i = 0; i < result.length; i ++) {
+                    ImagePanel.add(testing.get(i));
+                    ImagePanel.add(training.get((int)result[i][1]));
+                }
+                /*StringBuilder sb = new StringBuilder();
+                for (i = 0; i < result.length; i++) {
+                    if (i % 4 == 0)
+                        sb.append("\n");
+                    for (int j = 0; j < result[i].length; j++) {
+                        sb.append(result[i][j] + " ");
+                    }
 
+                    sb.append("\n");
+                }*/
+                //textPane1.setText(sb.toString());
+                //ImageTable.invalidate();
+            }
+        });
     }
+
+
+
     public static void main(String[] args){
         MainFrame m = new MainFrame();
     }
+
+    private class PreviewPanel extends JPanel{
+
+        private BufferedImage image;
+        File pathToImage;
+        public File getPathToImage() {
+            return pathToImage;
+        }
+
+        public PreviewPanel(int i) {
+            try {
+                pathToImage = new File("faces/s1/"+ i +".pgm");
+                PGMReaderAlt readerAlt = new PGMReaderAlt(pathToImage);
+                image = readerAlt.read();
+                this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                // handle exception...
+            }
+        }
+        public PreviewPanel(File f) {
+            try {
+                PGMReaderAlt readerAlt = new PGMReaderAlt(f);
+                image = readerAlt.read();
+                this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                pathToImage = f;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
+        }
+
+    }
+
 }

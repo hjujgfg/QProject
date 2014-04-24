@@ -27,10 +27,19 @@ public class Eigenface {
         }
         return matr;
     }
+    public static int[][] readFaces(File[] images) {
+        int[][] matr = new int[images.length][];
+        int l = 0;
+        for (File f : images) {
+            matr[l] = readFace(f.getPath());
+            l ++;
+        }
+        return matr;
+    }
 
-    public static void localMain(int[] nums) {
-        int[] f = {1, 2};
-        int[][] matr = readFaces(nums, f);
+    public static double[][] localMain(int[][] matr, int [][] I) {
+        //int[] f = {1, 2};
+        //int[][] matr = readFaces(nums, f);
         int[] mean = calcMean(matr);
         subtractMean(matr, mean);
         try {
@@ -67,33 +76,33 @@ public class Eigenface {
                 e.printStackTrace();
             }
         }
-        double[][] weights = new double[rm.getRowDimension()][nums.length*f.length];
+        double[][] weights = new double[rm.getRowDimension()][matr.length];
         for (int i = 0; i < rm.getRowDimension(); i++) {
-            for (int j = 0; j < nums.length*f.length; j++) {
+            for (int j = 0; j < matr.length; j++) {
                 weights[j][i] = multVectors(eigenvectors[j], rm.getRow(i));
             }
         }
         weights = transpose(weights);
-        int[] n = {22, 32, 30, 7, 16, 35};
-        int[] fs = {3, 4, 5, 6};
+
         //EigenDecomposition ed = new EigenDecomposition(rm);
 
         cc = new LUDecomposition(cc).getSolver().getInverse();
-        double[][] res = recognize(n, fs, weights, eigenvectors, mean, cc);
+        double[][] res = recognize(I, weights, eigenvectors, mean, cc);
         System.out.print("\n Our Result \n");
         for (int i = 0; i < res.length; i++) {
             if (i % 4 == 0)
                 System.out.print("\n");
-            for (int j = 0; j < res[j].length; j++) {
+            for (int j = 0; j < res[i].length; j++) {
                 System.out.print(res[i][j] + " ");
             }
 
             System.out.print("\n");
         }
+        return res;
     }
 
-    private static double[][] recognize(int[] nums, int[] fs, double[][] W, double[][] U, int[] M, RealMatrix covarianceMatr) {
-        int[][] I = readFaces(nums, fs);
+    private static double[][] recognize(int[][] I, double[][] W, double[][] U, int[] M, RealMatrix covarianceMatr) {
+        //int[][] I = readFaces(nums, fs);
         subtractMean(I, M);
         double[][] ret = new double[I.length][2];
         for (int i = 0; i < I.length; i++) {
@@ -106,15 +115,15 @@ public class Eigenface {
             double[] d = new double[w.length];
 
             for (int j = 0; j < w.length; j++) {
-                /*RealVector r1 = new ArrayRealVector(w);
+                RealVector r1 = new ArrayRealVector(w);
                 RealVector r2 = new ArrayRealVector(W[j]);
 
-                d[j] = r1.getDistance(r2);*/
-                double [] subVect = new double[w.length];
+                d[j] = r1.getDistance(r2);
+                /*double [] subVect = new double[w.length];
                 for (int k = 0; k < subVect.length; k ++)
                     subVect[k] = w[k] - W[j][k];
                 double[] first = covarianceMatr.preMultiply(subVect);
-                d[j] = Math.sqrt(Math.sqrt(multVectors(first, subVect)));
+                d[j] = Math.sqrt(Math.sqrt(multVectors(first, subVect)));*/
             }
             RealVector r = new ArrayRealVector(d);
 
