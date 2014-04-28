@@ -35,11 +35,17 @@ public class MainFrame extends JFrame{
     private JButton identifyBtn;
     private JButton addTestBtn;
     private JPanel testPanel;
+    private JLabel trainingName;
+    private JLabel testingName;
+    private JLabel identName;
+    private JButton clearBtn;
+    private JTextField thresholdField;
     private JTextPane textPane1;
     private JTable ImageTable;
     Webcam webcam;
     ArrayList<PreviewPanel> training;
     ArrayList<PreviewPanel> testing;
+    int threshold = 80;
     public MainFrame() {
         super("PMBPI Project");
         setContentPane(rootPanel);
@@ -82,6 +88,8 @@ public class MainFrame extends JFrame{
                     PreviewPanel p = new PreviewPanel(file);
                     training.add(p);
                     PrevMainPanel.add(p);
+                    PrevMainPanel.revalidate();
+                    PrevMainPanel.repaint();
                 }
             }
         });
@@ -95,13 +103,17 @@ public class MainFrame extends JFrame{
                     PreviewPanel p = new PreviewPanel(file);
                     testing.add(p);
                     testPanel.add(p);
-                    testPanel.invalidate();
+                    testPanel.revalidate();
+                    testPanel.repaint();
                 }
             }
         });
         identifyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (thresholdField.getText() != null || thresholdField.getText() != "" ) {
+                    threshold = Integer.parseInt(thresholdField.getText());
+                }
                 File[] testFiles = new File[testing.size()];
                 int  i = 0;
                 for (PreviewPanel p : testing) {
@@ -118,9 +130,37 @@ public class MainFrame extends JFrame{
                 int[][] testingMatrix = Eigenface.readFaces(testFiles);
                 double [][] result = Eigenface.localMain(trainingMatrix, testingMatrix);
                 for (i = 0; i < result.length; i ++) {
-                    ImagePanel.add(testing.get(i));
+                    GridBagConstraints cons = new GridBagConstraints();
+                    cons.gridx = i;
+                    cons.gridy = i;
+                    ImagePanel.add(testing.get(i), cons);
                     ImagePanel.add(training.get((int)result[i][1]));
+
                 }
+                i = 0;
+                for (PreviewPanel p : training) {
+                    GridBagConstraints cons = new GridBagConstraints();
+                    cons.gridx = 0;
+                    cons.gridy = i;
+                    ImagePanel.add(p, cons);
+                    int k = 1;
+                    for (int j = 0; j < result.length; j ++) {
+                        cons.gridx = k;
+                        cons.gridy = i;
+                        if ((int)result[j][1] == i) {
+                            if (result[j][0] > threshold * 100000)
+                            {
+                                testing.get(j).setBorder(BorderFactory.createLineBorder(Color.RED));
+                            }
+                            ImagePanel.add(testing.get(j), cons);
+
+                            k ++;
+                        }
+                    }
+                    i++;
+                }
+                ImagePanel.revalidate();
+                ImagePanel.repaint();
                 /*StringBuilder sb = new StringBuilder();
                 for (i = 0; i < result.length; i++) {
                     if (i % 4 == 0)
@@ -135,6 +175,28 @@ public class MainFrame extends JFrame{
                 //ImageTable.invalidate();
             }
         });
+        clearBtn.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                training.clear();
+                testing.clear();
+                PrevMainPanel.removeAll();
+                testPanel.removeAll();
+                ImagePanel.removeAll();
+            }
+        });
+    }
+
+    @Override
+    public void repaint() {
+        super.repaint();
+        for (PreviewPanel p : training) {
+            PrevMainPanel.add(p);
+        }
+        for (PreviewPanel p : testing) {
+            testPanel.add(p);
+        }
     }
 
 
