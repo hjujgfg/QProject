@@ -25,7 +25,7 @@ public class FeatureExtract {
 	/**
 	 * how many mfcc coefficients per frame
 	 */
-	private int numCepstra = 12;
+	private int numCepstra = 20;
 
 	private double[][] featureVector;
 	private double[][] mfccFeature;
