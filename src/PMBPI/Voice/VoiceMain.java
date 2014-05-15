@@ -14,6 +14,8 @@ import java.sql.ResultSet;
  */
 public class VoiceMain {
 
+    public static int samplesPerFrame = 16;
+    public static int samplingRate = 8000;
     public static void main(String[] args) {
         String[] trainFiles = {"audio_data/male_audio/M_1298636292/1298636292_1.wav",
                 "audio_data/male_audio/M_1298636374/1298636374_1.wav",
@@ -30,21 +32,25 @@ public class VoiceMain {
                 "audio_data/male_audio/M_1298640657/1298640657_1.wav",
                 "audio_data/male_audio/M_1298641573/1298641573_1.wav",
                 "audio_data/male_audio/M_1298642564/1298642564_1.wav"};
-        String[] testingFiles = {"audio_data/male_audio/M_1298636292/1298636292_5.wav",
-                "audio_data/male_audio/M_1298636374/1298636374_5.wav",
-                "audio_data/male_audio/M_1298636799/1298636799_5.wav",
-                "audio_data/male_audio/M_1298636824/1298636824_5.wav",
-                "audio_data/male_audio/M_1298637113/1298637113_5.wav",
-                "audio_data/male_audio/M_1298638087/1298638087_5.wav",
-                "audio_data/male_audio/M_1298638329/1298638329_5.wav",
-                "audio_data/male_audio/M_1298639452/1298639452_5.wav",
-                "audio_data/male_audio/M_1298639501/1298639501_5.wav",
-                "audio_data/male_audio/M_1298639895/1298639895_5.wav",
-                "audio_data/male_audio/M_1298639967/1298639967_5.wav",
-                "audio_data/male_audio/M_1298640189/1298640189_5.wav",
-                "audio_data/male_audio/M_1298640657/1298640657_5.wav",
-                "audio_data/male_audio/M_1298641573/1298641573_5.wav",
-                "audio_data/male_audio/M_1298642564/1298642564_5.wav"};
+        String[] testingFiles = {"audio_data/male_audio/M_1298636292/1298636292_4.wav",
+                "audio_data/male_audio/M_1298636374/1298636374_4.wav",
+                "audio_data/male_audio/M_1298636799/1298636799_4.wav",
+                "audio_data/male_audio/M_1298636824/1298636824_4.wav",
+                "audio_data/male_audio/M_1298637113/1298637113_4.wav",
+                "audio_data/male_audio/M_1298638087/1298638087_4.wav",
+                "audio_data/male_audio/M_1298638329/1298638329_4.wav",
+                "audio_data/male_audio/M_1298639452/1298639452_4.wav",
+                "audio_data/male_audio/M_1298639501/1298639501_4.wav",
+                "audio_data/male_audio/M_1298639895/1298639895_4.wav",
+                "audio_data/male_audio/M_1298639967/1298639967_4.wav",
+                "audio_data/male_audio/M_1298640189/1298640189_4.wav",
+                "audio_data/male_audio/M_1298640657/1298640657_4.wav",
+                "audio_data/male_audio/M_1298641573/1298641573_4.wav",
+                "audio_data/male_audio/M_1298642564/1298642564_4.wav",
+                "audio_data/male_audio/M_1298643578/1298643578_4.wav",
+                "audio_data/male_audio/M_1298646185/1298646185_4.wav",
+                "audio_data/male_audio/M_1298646491/1298646491_4.wav",
+                "audio_data/male_audio/M_1298647737/1298647737_4.wav"};
 
         //String testFiles = "audio_data/male_audio/M_1298636824/1298636824_2.wav";
         /*double [][] trainigs = generateCentroids(trainFiles);
@@ -53,7 +59,7 @@ public class VoiceMain {
             System.out.println(d+" ");
         }*/
 
-        double[][] res = identifySet(trainFiles, testingFiles, true, true, 15);
+        double[][] res = identifySet(trainFiles, testingFiles, false, true, 15);
         for (double[] d : res) {
             for (double dd : d) {
                 System.out.print(dd + " ");
@@ -151,13 +157,13 @@ public class VoiceMain {
         return d;
     }
 
-    static double[][] generateMFCCS(String path) {
+    static double[][] generateMFCCS(String path, int samplePerFrame, int samplingRate) {
         WaveData wd = new WaveData();
         File testFile = new File(path);
         float[] amplitude = wd.extractAmplitudeFromFile(testFile);
-        PreProcess pp = new PreProcess(amplitude, 16, 8000);
+        PreProcess pp = new PreProcess(amplitude, samplePerFrame, samplingRate);
         //float[] tt = new float[]
-        FeatureExtract fe = new FeatureExtract(pp.framedSignal, 8000, 16);
+        FeatureExtract fe = new FeatureExtract(pp.framedSignal, samplingRate, samplePerFrame);
         fe.makeMfccFeatureVector();
         FeatureVector fv = fe.getFeatureVector();
         double[][] mfccs = fv.getMfccFeature();
@@ -194,18 +200,24 @@ public class VoiceMain {
         return mean;
     }
 
+    public static double[] getCentroidOfRecording(String path, int samplesPerFrame, int samplingRate) {
+        double[][] r = generateMFCCS(path, samplesPerFrame, samplingRate);
+        double [] centroid = calcCentroid(r);
+        return centroid;
+    }
+
     static double[][] generateCentroids(String[] trainingFiles) {
         double[][] centroids = new double[trainingFiles.length][];
         int i = 0;
         for (String s : trainingFiles) {
-            centroids[i] = calcCentroid(generateMFCCS(s));
+            centroids[i] = calcCentroid(generateMFCCS(s, samplesPerFrame, samplingRate));
             i++;
         }
         return centroids;
     }
 
     static double[][] prepareTestFromFile(String s, double[][] centroids, int ind) {
-        double[][] test = generateMFCCS(s);
+        double[][] test = generateMFCCS(s, samplesPerFrame, samplingRate);
         try {
             FileOutputStream fos = new FileOutputStream("serializedTestinggData" + ind + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -266,5 +278,4 @@ public class VoiceMain {
         }
         return res;
     }
-
 }

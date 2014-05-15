@@ -37,16 +37,16 @@ public class Eigenface {
         return matr;
     }
 
-    public static double[][] localMain(int[][] matr, int [][] I) {
+    public static double[][] localMain(int[][] matr, int [][] I, int width, int height) {
         //int[] f = {1, 2};
         //int[][] matr = readFaces(nums, f);
         int[] mean = calcMean(matr);
         subtractMean(matr, mean);
         try {
-            writeToPGM(mean, 92, 112, "faces/mean.pgm");
+            writeToPGM(mean, width, height, "faces/mean.pgm");
             int t = 0;
             for (int[] im : matr) {
-                writeToPGM(im, 92, 112, "faces/wtmean" + t + ".pgm");
+                writeToPGM(im, width, height, "faces/wtmean" + t + ".pgm");
                 t++;
             }
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class Eigenface {
                 intv[j] = (int)eigenvectors[i][j];
             }
             try {
-                writeToPGM(intv, 92, 112, "faces/eig"+i+".pgm");
+                writeToPGM(intv, width, height, "faces/eig"+i+".pgm");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -101,7 +101,7 @@ public class Eigenface {
         return res;
     }
 
-    private static double[][] recognize(int[][] I, double[][] W, double[][] U, int[] M, RealMatrix covarianceMatr) {
+    public static double[][] recognize(int[][] I, double[][] W, double[][] U, int[] M, RealMatrix covarianceMatr) {
         //int[][] I = readFaces(nums, fs);
         subtractMean(I, M);
         double[][] ret = new double[I.length][2];
@@ -132,14 +132,14 @@ public class Eigenface {
         }
         return ret;
     }
-    private static double [] multVectByScalar(double[] vec, double scalar) {
+    static double [] multVectByScalar(double[] vec, double scalar) {
         double [] res = new double[vec.length];
         for (int i = 0; i < vec.length; i ++) {
             res [i] = vec[i]*scalar;
         }
         return res;
     }
-    public static RealVector[] getEigenvectors(RealMatrix rm) {
+    static RealVector[] getEigenvectors(RealMatrix rm) {
 
         RealVector[] vects = new RealVector[rm.getRowDimension()];
 
@@ -151,7 +151,7 @@ public class Eigenface {
         }
         return vects;
     }
-    private static double[] getEigenvalues(RealMatrix rm) {
+    static double[] getEigenvalues(RealMatrix rm) {
 
         EigenDecomposition f = new EigenDecomposition(rm);
         double[] vals = new double[rm.getRowDimension()];
@@ -161,7 +161,7 @@ public class Eigenface {
         return vals;
     }
 
-    private static double multVectors(double[] a, double[] b) {
+    static double multVectors(double[] a, double[] b) {
         double res = 0;
         for (int i = 0; i < a.length; i++) {
             res += a[i] * b[i];
@@ -169,7 +169,7 @@ public class Eigenface {
         return res;
     }
 
-    private static RealMatrix toRealMatrix(int[][] m) {
+    static RealMatrix toRealMatrix(int[][] m) {
         RealMatrix r;
         double d[][] = new double[m.length][m[0].length];
         for (int i = 0; i < m.length; i++) {
@@ -182,7 +182,7 @@ public class Eigenface {
     }
 
 
-    private static int[] calcMean(int[][] arr) {
+    static int[] calcMean(int[][] arr) {
         int[] avg = new int[arr[0].length];
         for (int i = 0; i < arr[0].length; i++) {
             avg[i] = 0;
@@ -195,7 +195,7 @@ public class Eigenface {
         return avg;
     }
 
-    private static void subtractMean(int[][] matr, int[] mean) {
+    static void subtractMean(int[][] matr, int[] mean) {
         for (int i = 0; i < matr.length; i++) {
             for (int j = 0; j < mean.length; j++) {
                 matr[i][j] -= mean[j];
@@ -203,7 +203,7 @@ public class Eigenface {
         }
     }
 
-    public static int[][] matrixMult(int[][] a, int[][] b) {
+    static int[][] matrixMult(int[][] a, int[][] b) {
         int m = a.length;
         int n = b.length;
         int l = b[0].length;
@@ -223,7 +223,7 @@ public class Eigenface {
 
 //    private static double[] multiplyByRow()
 
-    public static int[][] transpose(int[][] a) {
+    static int[][] transpose(int[][] a) {
         int[][] T = new int[a[0].length][a.length];
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
@@ -233,7 +233,7 @@ public class Eigenface {
         return T;
     }
 
-    public static double[][] transpose(double[][] a) {
+    static double[][] transpose(double[][] a) {
         double[][] T = new double[a[0].length][a.length];
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
@@ -243,7 +243,7 @@ public class Eigenface {
         return T;
     }
 
-    private static int[] readFace(String face) {
+    public static int[] readFace(String face) {
         int[] image = new int[0];
         try {
             InputStream is = new BufferedInputStream(new FileInputStream(face));
@@ -295,11 +295,11 @@ public class Eigenface {
         return image;
     }
 
-    private static void writeToPGM(int[] image, int x, int y, String dest) throws IOException {
+    public static void writeToPGM(int[] image, int x, int y, String dest) throws IOException {
         OutputStream osw = new BufferedOutputStream(new FileOutputStream(dest));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(osw));
         DataOutputStream dos = new DataOutputStream(osw);//
-        dos.writeBytes("P5\n92 112\n255\n");
+        dos.writeBytes("P5\n"+x+" "+ y+"\n255\n");
 //        for (int i = 0; i < x; i ++) {
 //            for (int j = 0; j < y; j ++) {
 //                //bw.write(test[i][j]);
