@@ -40,8 +40,13 @@ public class Person {
         return res;
     }
 
-    public void addFace(String path) {
-        trainingFaces.add(robustReadFace(path));
+    public int addFace(String path) {
+        try {
+            trainingFaces.add(robustReadFace(path));
+            return DataHolder.SUCCESS;
+        } catch (NullPointerException e) {
+            return DataHolder.NULL_FILE_ERROR;
+        }
     }
 
     public void addVoice(String path) {

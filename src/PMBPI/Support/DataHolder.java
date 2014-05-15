@@ -66,6 +66,17 @@ public class DataHolder {
 
         return res;
     }
+
+    public int addFace(int personIndex, File face) {
+        Person current = people.get(personIndex);
+        int res = current.addFace(face.getPath());
+        if (res == SUCCESS) {
+            int[][] matr = collectFaceMatrix();
+            res = writeFaceMatrix(matr);
+        }
+        return res;
+    }
+
     private int writeFaceMatrix(int[][] matr) {
         try {
             File faceMatrixHolder = new File("data/faceMatrix.ser");
@@ -79,6 +90,7 @@ public class DataHolder {
             return WRITE_FACE_MATRIX_ERROR;
         }
     }
+
     public int removePerson(Person p) {
         people.remove(p);
         int[][] matr = collectFaceMatrix();
@@ -97,7 +109,7 @@ public class DataHolder {
 
     public int setSoundCapureParams(int samplesPerFrame, int samplingRate) {
         if (samplesPerFrame < 8 || samplesPerFrame > 32 || samplingRate < 8000 || samplingRate > 32000)
-            return  VOICE_PARAMS_ERROR;
+            return VOICE_PARAMS_ERROR;
         VOICE_SAMPLE_PER_FRAME = samplesPerFrame;
         VOICE_SAMPLING_RATE = samplingRate;
         return SUCCESS;
@@ -113,7 +125,7 @@ public class DataHolder {
                 preMatrix.add(t);
                 personFacesNumbers.add(personCounter);
             }
-            personCounter ++;
+            personCounter++;
         }
         matrix = new int[preMatrix.size()][];
         int i = 0;
