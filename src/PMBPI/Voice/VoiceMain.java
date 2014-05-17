@@ -66,7 +66,7 @@ public class VoiceMain {
             }
             System.out.println();
         }
-        double[][] res2 = calcDistByMean(res);
+        double[][] res2 = calcDistByMeanSet(res);
         System.out.println("results _____________");
         int i = 0;
         int errorNumber = 0;
@@ -96,7 +96,7 @@ public class VoiceMain {
         return res;
     }
 
-    static double[][] calcDistByMean(double[][] set) {
+    static double[][] calcDistByMeanSet(double[][] set) {
         double[][] res = new double[set.length][3];
         int i = 0;
         for (double[] vec : set) {
@@ -108,6 +108,11 @@ public class VoiceMain {
         }
 
         return res;
+    }
+
+    static double[] calcDistBymean(double[] distances) {
+        double mean = calcMean(distances);
+        return findFurtherest(mean, distances);
     }
 
     static double[] findFurtherest(double mean, double[] vec) {
@@ -201,9 +206,13 @@ public class VoiceMain {
     }
 
     public static double[] getCentroidOfRecording(String path, int samplesPerFrame, int samplingRate) {
-        double[][] r = generateMFCCS(path, samplesPerFrame, samplingRate);
-        double [] centroid = calcCentroid(r);
-        return centroid;
+        try {
+            double[][] r = generateMFCCS(path, samplesPerFrame, samplingRate);
+            double [] centroid = calcCentroid(r);
+            return centroid;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     static double[][] generateCentroids(String[] trainingFiles) {
@@ -241,6 +250,17 @@ public class VoiceMain {
             res[i] = res[i] * res[i];
         }
         return res;
+    }
+
+    public static double[] identify(double[] testCentroid, double[][] trainingCentroids) {
+        double[] res = new double[trainingCentroids.length];
+        RealVector testVec = new ArrayRealVector(testCentroid);
+        for (int i = 0; i < trainingCentroids.length; i++) {
+            RealVector current = new ArrayRealVector(trainingCentroids[i]);
+            res[i] = testVec.getDistance(current);
+            res[i] = res[i] * res[i];
+        }
+        return calcDistBymean(res);
     }
 
     static double[][] identifySet(String[] training, String[] testing, boolean needsTraining, boolean needgenTests, int numtests) {

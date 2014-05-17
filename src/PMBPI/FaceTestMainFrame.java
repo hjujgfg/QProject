@@ -180,7 +180,7 @@ public class FaceTestMainFrame extends JFrame{
         openButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                WebCamFrame wc = new WebCamFrame();
             }
         });
     }

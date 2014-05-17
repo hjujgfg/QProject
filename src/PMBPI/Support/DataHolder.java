@@ -1,6 +1,7 @@
 package PMBPI.Support;
 
 import PMBPI.Face.Eigenface;
+import PMBPI.Face.ImageProcessor;
 import PMBPI.Voice.VoiceMain;
 
 import java.io.File;
@@ -31,8 +32,10 @@ public class DataHolder {
     ArrayList<int[]> trainingFaceMatrix;
     ArrayList<double[]> trainingVoices;
 
+    ImageProcessor imageProcessor;
 
     public DataHolder() {
+        imageProcessor = new ImageProcessor();
         people = new ArrayList<Person>();
         personFacesNumbers = new ArrayList<Integer>();
     }

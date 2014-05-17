@@ -1,7 +1,9 @@
 package PMBPI;
 
+import PMBPI.Face.ImageProcessor;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import org.apache.log4j.BasicConfigurator;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,8 +24,12 @@ public class WebCamFrame extends JFrame{
     private JButton takeShotBtn;
     private JPanel camPanel;
     private Webcam webcam;
+    public static void main(String[] params) {
+        WebCamFrame fc = new WebCamFrame();
+    }
     public WebCamFrame() {
         super("PMBPI Project");
+        BasicConfigurator.configure();
         setContentPane(rootPanel);
         pack();
 
@@ -51,6 +57,8 @@ public class WebCamFrame extends JFrame{
                 try {
                     ImageIO.write(image, "PNG", new File("test.png"));
                     ImageIcon icon = new ImageIcon("test.png");
+                    ImageProcessor processor = new ImageProcessor();
+                    processor.writePGM(image, new File("test.pgm"));
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
