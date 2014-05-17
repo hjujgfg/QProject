@@ -59,7 +59,7 @@ public class VoiceMain {
             System.out.println(d+" ");
         }*/
 
-        double[][] res = identifySet(trainFiles, testingFiles, false, true, 15);
+        double[][] res = identifySet(trainFiles, testingFiles, true, true, 15);
         for (double[] d : res) {
             for (double dd : d) {
                 System.out.print(dd + " ");
@@ -97,13 +97,14 @@ public class VoiceMain {
     }
 
     static double[][] calcDistByMeanSet(double[][] set) {
-        double[][] res = new double[set.length][3];
+        double[][] res = new double[set.length][4];
         int i = 0;
         for (double[] vec : set) {
             res[i][0] = calcMean(vec);
             double[] temp = findFurtherest(res[i][0], vec);
             res[i][1] = temp[0];
             res[i][2] = temp[1];
+            res[i][3] = temp[2];
             i++;
         }
 
@@ -116,7 +117,7 @@ public class VoiceMain {
     }
 
     static double[] findFurtherest(double mean, double[] vec) {
-        double[] res = new double[2];
+        double[] res = new double[3];
         double max = 0;
         int maxInd = 0;
 
@@ -138,6 +139,7 @@ public class VoiceMain {
         int minindex = findMax(mins);
         res[0] = vec[minindex];
         res[1] = minindex;
+        res[2] = calcVariance(vec);
         return res;
     }
 
@@ -160,6 +162,17 @@ public class VoiceMain {
         }
         d /= vec.length;
         return d;
+    }
+
+    static double calcVariance(double [] vec) {
+        double meanSquare = 0;
+        double squareMean = 0;
+        for (double d : vec) {
+            squareMean += d*d;
+            meanSquare += d;
+        }
+        meanSquare *= meanSquare;
+        return (squareMean - meanSquare/vec.length)/(vec.length-1);
     }
 
     static double[][] generateMFCCS(String path, int samplePerFrame, int samplingRate) {
@@ -243,6 +256,7 @@ public class VoiceMain {
         double[] res = new double[centroids.length];
         double[][] test = testMFCCS;
         double[] testCentr = calcCentroid(test);
+        //testCentr = removeUnneccessaryMFCCS(testCentr);
         RealVector testVec = new ArrayRealVector(testCentr);
         for (int i = 0; i < centroids.length; i++) {
             RealVector current = new ArrayRealVector(centroids[i]);

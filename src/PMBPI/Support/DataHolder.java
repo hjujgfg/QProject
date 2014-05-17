@@ -29,9 +29,6 @@ public class DataHolder {
     ArrayList<Person> people;
     ArrayList<Integer> personFacesNumbers;
 
-    ArrayList<int[]> trainingFaceMatrix;
-    ArrayList<double[]> trainingVoices;
-
     ImageProcessor imageProcessor;
 
     public DataHolder() {
@@ -39,24 +36,6 @@ public class DataHolder {
         people = new ArrayList<Person>();
         personFacesNumbers = new ArrayList<Integer>();
     }
-
-    /*public int addPerson(String name, File face, File voice) {
-        if (face == null && voice == null) {
-            return -1;
-        }
-        Person p = new Person(name);
-        if (face != null) {
-            int [] newface = robustReadFace(face.getPath());
-            trainingFaceMatrix.add(newface);
-            *//*PersonFace item = new PersonFace(newface, p);
-            trainingFaceMatrix.add(item);*//*
-        }
-        if (voice != null) {
-            double[] newcentroid = robustReadVoice(voice.getPath());
-            trainingVoices.add(newcentroid);
-        }
-        return 1;
-    }*/
 
     public int addPerson(String name, File face, File voice) {
         if (face == null || voice == null) {
@@ -95,6 +74,7 @@ public class DataHolder {
     }
 
     public int removePerson(Person p) {
+
         people.remove(p);
         int[][] matr = collectFaceMatrix();
         int res = writeFaceMatrix(matr);
@@ -138,25 +118,4 @@ public class DataHolder {
         }
         return matrix;
     }
-
-
-
-
-   /* private class PersonFace {
-        int[] face;
-        Person p;
-        PersonFace (int [] f, Person per) {
-            face = f;
-            p = per;
-        }
-    }
-
-    private class PersonVoice {
-        double [] voiceSample;
-        Person p;
-        PersonVoice(double [] voice, Person p) {
-            voiceSample = voice;
-            this.p = p;
-        }
-    }*/
 }

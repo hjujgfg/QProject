@@ -17,7 +17,6 @@ public class Person {
     public static final int FACE = 1;
     public static final int VOICE = 2;
 
-
     private String name;
     public int ID;
     private ArrayList<int[]> trainingFaces;
@@ -127,44 +126,9 @@ public class Person {
         }
     }
 
-   /* public Person(String name, int newIndex, int type) {
-        new Person(name);
-        switch (type) {
-            case FACE:
-                faces.add(newIndex);
-                break;
-            case VOICE:
-                voices.add(newIndex);
-                break;
-            default: break;
-        }
-    }*/
+    public int clearData() {
+        File f = new File("data/"+name+".ser");
+        return 1;
 
-    /*public void addIndex(int newIndex, int type) {
-        switch (type) {
-            case FACE:
-                faces.add(newIndex);
-                break;
-            case VOICE:
-                voices.add(newIndex);
-                break;
-            default: break;
-        }
     }
-
-    public void updateIndices(int removedIndex, int type) {
-        switch (type) {
-            case FACE:
-                for (int i = 0; i < faces.size(); i ++) {
-                    faces.set(i, faces.get(i) - 1);
-                }
-                break;
-            case VOICE:
-                for (int i = 0; i < voices.size(); i ++) {
-                    voices.set(i, voices.get(i) - 1);
-                }
-                break;
-            default: break;
-        }
-    }*/
 }
