@@ -8,6 +8,7 @@ import org.apache.commons.math3.linear.RealVector;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * Created by egor on 5/6/14.
@@ -15,7 +16,7 @@ import java.sql.ResultSet;
 public class VoiceMain {
 
     public static int samplesPerFrame = 16;
-    public static int samplingRate = 8000;
+    public static int samplingRate = 16000;
     public static void main(String[] args) {
         String[] trainFiles = {"audio_data/male_audio/M_1298636292/1298636292_1.wav",
                 "audio_data/male_audio/M_1298636374/1298636374_1.wav",
@@ -52,14 +53,7 @@ public class VoiceMain {
                 "audio_data/male_audio/M_1298646491/1298646491_4.wav",
                 "audio_data/male_audio/M_1298647737/1298647737_4.wav"};
 
-        //String testFiles = "audio_data/male_audio/M_1298636824/1298636824_2.wav";
-        /*double [][] trainigs = generateCentroids(trainFiles);
-        double[] res = identify(testFiles, trainigs);
-        for (double d : res) {
-            System.out.println(d+" ");
-        }*/
-
-        double[][] res = identifySet(trainFiles, testingFiles, true, true, 15);
+        /*double[][] res = identifySet(trainFiles, testingFiles, true, true, 15);
         for (double[] d : res) {
             for (double dd : d) {
                 System.out.print(dd + " ");
@@ -79,7 +73,57 @@ public class VoiceMain {
             i++;
             System.out.println();
         }
-        System.out.println("Num errors = " + errorNumber);
+        System.out.println("Num errors = " + errorNumber);*/
+        String [][] trainingFiles = new String[18][7];
+        for (int i = 0; i < 18; i ++) {
+            for (int j = 0; j < 7; j ++) {
+                trainingFiles[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+j+".wav";
+            }
+        }
+        double[][] trainingStuff = new double[18][];
+        for (int i = 0; i < 18; i ++) {
+            trainingStuff[i] = trainOnSeveralFiles(trainingFiles[i], samplesPerFrame, samplingRate);
+        }
+        String [][] testingStrings = new String[24][3];
+        for (int i = 0; i < 24; i ++) {
+            for (int j = 7; j < 10; j ++) {
+                testingStrings[i][j-7] = "audio_data/16khz_16bit/"+(i+1)+"/"+j+".wav";
+            }
+        }
+        double[][] testingCentroids = new double[24][];
+        for (int i = 0; i < 24; i ++) {
+            testingCentroids[i] = trainOnSeveralFiles(testingStrings[i], samplesPerFrame, samplingRate);
+        }
+        double [][] res = new double[testingCentroids.length][];
+        for (int i = 0; i < 24; i++) {
+            res[i] = identify(testingCentroids[i], trainingStuff);
+        }
+        int i = 0;
+        int errorNumber = 0;
+        for (double[] d : res) {
+            for (double dd : d) {
+                System.out.print(dd + " ");
+            }
+            if (d[2] != i) errorNumber ++;
+            i++;
+            System.out.println();
+        }
+        System.out.println("Num errors = " + (errorNumber - 6));
+        /*double[][] res2 = calcDistByMeanSet(res);
+        System.out.println("results _____________");
+
+
+        for (double[] d : res2) {
+            System.out.print(i + " ");
+            for (double dd : d) {
+                System.out.print(dd + " ");
+            }
+            if (d[2] != i) errorNumber++;
+            i++;
+            System.out.println();
+        }
+        System.out.println("Num errors = " + errorNumber);*/
+
     }
 
     static double[][] train(String[] trainFiles) {
@@ -197,10 +241,24 @@ public class VoiceMain {
         return mfccs;
     }
 
+    static double[] trainOnSeveralFiles(String[] paths, int samplesPerFrame, int samplingRate) {
+        ArrayList<double[]> totalCluster = new ArrayList<double[]>();
+        for (String s : paths) {
+            totalCluster.add(calcCentroid(generateMFCCS(s, samplesPerFrame, samplingRate)));
+        }
+        double [][] res = new double[totalCluster.size()][];
+        int i = 0;
+        for (double [] d : totalCluster) {
+            res[i] = d;
+            i ++;
+        }
+        return calcCentroid(res);
+    }
+
     static double[] removeUnneccessaryMFCCS(double[] vec) {
         double[] res = new double[vec.length - 3];
-        for (int i = 0; i < vec.length - 3; i++) {
-            res[i] = vec[i + 1];
+        for (int i = 1; i < vec.length - 2; i++) {
+            res[i-1] = vec[i + 1];
         }
         return res;
     }
