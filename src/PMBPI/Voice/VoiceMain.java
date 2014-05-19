@@ -74,28 +74,30 @@ public class VoiceMain {
             System.out.println();
         }
         System.out.println("Num errors = " + errorNumber);*/
-        String [][] trainingFiles = new String[18][7];
-        for (int i = 0; i < 18; i ++) {
+        int trainingN = 24;
+        int testingN = 24;
+        String [][] trainingFiles = new String[trainingN][7];
+        for (int i = 0; i < trainingN; i ++) {
             for (int j = 0; j < 7; j ++) {
                 trainingFiles[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+j+".wav";
             }
         }
-        double[][] trainingStuff = new double[18][];
-        for (int i = 0; i < 18; i ++) {
+        double[][] trainingStuff = new double[trainingN][];
+        for (int i = 0; i < trainingN; i ++) {
             trainingStuff[i] = trainOnSeveralFiles(trainingFiles[i], samplesPerFrame, samplingRate);
         }
-        String [][] testingStrings = new String[24][3];
-        for (int i = 0; i < 24; i ++) {
+        String [][] testingStrings = new String[testingN][3];
+        for (int i = 0; i < testingN; i ++) {
             for (int j = 7; j < 10; j ++) {
                 testingStrings[i][j-7] = "audio_data/16khz_16bit/"+(i+1)+"/"+j+".wav";
             }
         }
-        double[][] testingCentroids = new double[24][];
-        for (int i = 0; i < 24; i ++) {
+        double[][] testingCentroids = new double[testingN][];
+        for (int i = 0; i < testingN; i ++) {
             testingCentroids[i] = trainOnSeveralFiles(testingStrings[i], samplesPerFrame, samplingRate);
         }
         double [][] res = new double[testingCentroids.length][];
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < testingN; i++) {
             res[i] = identify(testingCentroids[i], trainingStuff);
         }
         int i = 0;
@@ -104,11 +106,11 @@ public class VoiceMain {
             for (double dd : d) {
                 System.out.print(dd + " ");
             }
-            if (d[2] != i) errorNumber ++;
+            if (d[1] != i) errorNumber ++;
             i++;
             System.out.println();
         }
-        System.out.println("Num errors = " + (errorNumber - 6));
+        System.out.println("Num errors = " + (errorNumber - (testingN - trainingN)));
         /*double[][] res2 = calcDistByMeanSet(res);
         System.out.println("results _____________");
 
@@ -161,6 +163,10 @@ public class VoiceMain {
     }
 
     static double[] findFurtherest(double mean, double[] vec) {
+        for (double d : vec) {
+            System.out.print(d + " ");
+        }
+        System.out.println();
         double[] res = new double[3];
         double max = 0;
         int maxInd = 0;
@@ -183,7 +189,8 @@ public class VoiceMain {
         int minindex = findMax(mins);
         res[0] = vec[minindex];
         res[1] = minindex;
-        res[2] = calcVariance(vec);
+        //res[2] = calcVariance(vec);
+        res[2] = mean - vec[minindex];
         return res;
     }
 
@@ -241,7 +248,7 @@ public class VoiceMain {
         return mfccs;
     }
 
-    static double[] trainOnSeveralFiles(String[] paths, int samplesPerFrame, int samplingRate) {
+    public static double[] trainOnSeveralFiles(String[] paths, int samplesPerFrame, int samplingRate) {
         ArrayList<double[]> totalCluster = new ArrayList<double[]>();
         for (String s : paths) {
             totalCluster.add(calcCentroid(generateMFCCS(s, samplesPerFrame, samplingRate)));

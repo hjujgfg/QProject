@@ -4,6 +4,7 @@ import PMBPI.Face.Eigenface;
 import PMBPI.Face.ImageProcessor;
 import PMBPI.Voice.VoiceMain;
 import com.sun.media.imageio.plugins.pnm.PNMImageWriteParam;
+import javafx.scene.chart.XYChart;
 
 import javax.imageio.ImageIO;
 import javax.xml.crypto.Data;
@@ -23,9 +24,14 @@ public class Person {
     private ArrayList<double[]> trainingVoices;
     private File userPic;
 
-    private ArrayList<Integer> faces;
-    private ArrayList<Integer> voices;
-
+    public Person(String name) {
+        this.name = name;
+        trainingFaces = new ArrayList<int[]>();
+        trainingVoices = new ArrayList<double[]>();
+    }
+    public void setUserPic(File f) {
+        this.userPic = f;
+    }
     public Person(String name, String facePath, String voicePath) {
         this.name = name;
         userPic = new File(facePath);
@@ -39,10 +45,6 @@ public class Person {
             throw new IllegalArgumentException("Aud");
     }
 
-    private double[] robustReadVoice(String path) {
-        if (true) throw new IllegalArgumentException("Unsupported File");
-        return VoiceMain.getCentroidOfRecording(path, DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
-    }
 
     public int addFace(String path) {
         try {
@@ -63,6 +65,17 @@ public class Person {
             return DataHolder.NULL_FILE_ERROR;
         }
     }
+
+    public int addMultVoicesForOneSample(String[] voices) {
+        try {
+            double [] d = VoiceMain.trainOnSeveralFiles(voices, DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+            trainingVoices.add(d);
+            return DataHolder.SUCCESS;
+        } catch (Exception e) {
+            return DataHolder.NULL_FILE_ERROR;
+        }
+    }
+
 
 
 
@@ -128,7 +141,12 @@ public class Person {
 
     public int clearData() {
         File f = new File("data/"+name+".ser");
-        return 1;
-
+        try {
+            boolean bb = f.delete();
+            if (bb) return DataHolder.SUCCESS;
+            return DataHolder.NULL_FILE_ERROR;
+        } catch (Exception e){
+            return DataHolder.NULL_FILE_ERROR;
+        }
     }
 }

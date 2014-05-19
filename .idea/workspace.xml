@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc8c40ab-d7a4-4002-85db-3d18ff37e84c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java" afterPath="$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PMBPI/Face/TrainingDataHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" afterPath="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Support/Person.java" afterPath="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" afterPath="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faces/eigenface.c" afterPath="$PROJECT_DIR$/faces/eigenface.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faces/facedata.xml" afterPath="$PROJECT_DIR$/faces/facedata.xml" />
@@ -64,67 +69,7 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="31" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="95" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="78" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="44" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="103" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="102" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -154,7 +99,52 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" line="79" class="PMBPI.Voice.VoiceMain" package="PMBPI.Voice">
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" line="81" class="PMBPI.Voice.VoiceMain" package="PMBPI.Voice">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" line="185" class="PMBPI.Support.DataHolder" package="PMBPI.Support">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" line="66" class="PMBPI.Support.DataHolder" package="PMBPI.Support">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" line="164" class="PMBPI.Face.Eigenface" package="PMBPI.Face">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -179,46 +169,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="WebCamFrame.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PMBPI/WebCamFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="38" selection-start="878" selection-end="878" vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="1350">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Eigenface.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="289" column="32" selection-start="9499" selection-end="9499" vertical-scroll-proportion="0.0" vertical-offset="5202" max-vertical-offset="5796">
+            <state line="164" column="38" selection-start="6109" selection-end="6109" vertical-scroll-proportion="0.0" vertical-offset="2623" max-vertical-offset="7524">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageProcessor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
+      <file leaf-file-name="FaceMain.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="29" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="2197" max-vertical-offset="2880">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VoiceMain.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="262" column="19" selection-start="9762" selection-end="9762" vertical-scroll-proportion="0.47611466" vertical-offset="4273" max-vertical-offset="6678">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeatureExtract.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="2538">
+            <state line="14" column="35" selection-start="456" selection-end="456" vertical-scroll-proportion="0.54545456" vertical-offset="0" max-vertical-offset="522">
               <folding />
             </state>
           </provider>
@@ -227,7 +190,7 @@
       <file leaf-file-name="DataHolder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="0" selection-start="2214" selection-end="2214" vertical-scroll-proportion="0.0" vertical-offset="1368" max-vertical-offset="2286">
+            <state line="67" column="46" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0" vertical-offset="769" max-vertical-offset="4500">
               <folding />
             </state>
           </provider>
@@ -236,17 +199,11 @@
       <file leaf-file-name="Person.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="131" column="0" selection-start="4102" selection-end="4102" vertical-scroll-proportion="0.0" vertical-offset="2358" max-vertical-offset="2520">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
-              <folding />
+            <state line="51" column="47" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="2682">
+              <folding>
+                <element signature="e#823#824#0" expanded="true" />
+                <element signature="e#855#856#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -285,26 +242,27 @@
         <option value="$PROJECT_DIR$/src/PMBPI/MainFrame.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/MainFrame.form" />
         <option value="$PROJECT_DIR$/src/PMBPI/Person.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java.u1conflict" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/FaceTestMainFrame.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/WebCamFrame.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/VoiceProcessor.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/TrainingDataHolder.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="64" />
     <option name="y" value="-1" />
-    <option name="width" value="1617" />
-    <option name="height" value="1052" />
+    <option name="width" value="1303" />
+    <option name="height" value="770" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -410,60 +368,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jai_imageio-1.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jai_imageio-1.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="media" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jai" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jai_imageio-1.1.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiFileNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="media" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -505,28 +409,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Voice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PMBPI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Support" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -591,31 +473,9 @@
       <recent name="junit.framework.TestCase" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.VoiceMain">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PMBPI.Face.FaceMain" />
-      <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="QProject" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LDA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="PMBPI.Face.LDA" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -690,6 +550,28 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="DataHolder" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PMBPI.Support.DataHolder" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="QProject" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -724,19 +606,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -762,6 +631,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -819,18 +701,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="Application.LDA" />
-      <item index="2" class="java.lang.String" itemvalue="Application.FaceTestMainFrame" />
-      <item index="3" class="java.lang.String" itemvalue="Application.VoiceMain" />
-      <item index="4" class="java.lang.String" itemvalue="Application.WebCamFrame" />
+      <item index="1" class="java.lang.String" itemvalue="Application.FaceTestMainFrame" />
+      <item index="2" class="java.lang.String" itemvalue="Application.VoiceMain" />
+      <item index="3" class="java.lang.String" itemvalue="Application.WebCamFrame" />
+      <item index="4" class="java.lang.String" itemvalue="Application.DataHolder" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.VoiceMain" />
-        <item index="1" class="java.lang.String" itemvalue="Application.WebCamFrame" />
-        <item index="2" class="java.lang.String" itemvalue="Application.FaceTestMainFrame" />
-        <item index="3" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="4" class="java.lang.String" itemvalue="Application.LDA" />
+        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
+        <item index="1" class="java.lang.String" itemvalue="Application.DataHolder" />
+        <item index="2" class="java.lang.String" itemvalue="Application.VoiceMain" />
+        <item index="3" class="java.lang.String" itemvalue="Application.WebCamFrame" />
+        <item index="4" class="java.lang.String" itemvalue="Application.FaceTestMainFrame" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -912,11 +794,15 @@
       <created>1400363826753</created>
       <updated>1400363826753</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Tests for new dataset ! error on 18 tests :OOOO&#10;">
+      <created>1400415835789</created>
+      <updated>1400415835789</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="64" y="-1" width="1617" height="1052" extended-state="6" />
+    <frame x="64" y="-1" width="1303" height="770" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -924,25 +810,25 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23157895" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43126968" sideWeight="0.57770896" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6432319" sideWeight="0.50216717" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38450074" sideWeight="0.57770896" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.66915053" sideWeight="0.5019216" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31269675" sideWeight="0.498452" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3099851" sideWeight="0.498452" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24396285" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2518363" sideWeight="0.4978328" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24365872" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.266766" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32744044" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -968,7 +854,8 @@
     <MESSAGE value="Face adding logic" />
     <MESSAGE value="Something" />
     <MESSAGE value="I don't remember what's going on here&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="I don't remember what's going on here&#10;" />
+    <MESSAGE value="Tests for new dataset ! error on 18 tests :OOOO&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for new dataset ! error on 18 tests :OOOO&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -978,18 +865,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="5" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="3024">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/Microphone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="35" selection-start="513" selection-end="513" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="990" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="23" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="828" />
@@ -1173,13 +1048,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="50" selection-start="483" selection-end="483" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="432">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/jai_imageio-1.1.jar!/com/sun/media/imageio/plugins/pnm/PNMImageWriteParam.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="13" selection-start="176" selection-end="176" vertical-scroll-proportion="0.15228426" vertical-offset="0" max-vertical-offset="591" />
@@ -1214,27 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="289" column="32" selection-start="9499" selection-end="9499" vertical-scroll-proportion="0.0" vertical-offset="4664" max-vertical-offset="5670">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="0" selection-start="2214" selection-end="2214" vertical-scroll-proportion="0.0" vertical-offset="758" max-vertical-offset="2160">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="131" column="0" selection-start="4102" selection-end="4102" vertical-scroll-proportion="0.0" vertical-offset="1740" max-vertical-offset="2376">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/FaceTestMainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="182" column="51" selection-start="7139" selection-end="7139" vertical-scroll-proportion="-0.7507599" vertical-offset="3266" max-vertical-offset="3924">
@@ -1249,20 +1096,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="29" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="2408" max-vertical-offset="2880">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="828">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="0" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="2538">
@@ -1270,9 +1103,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/JDK/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="438" column="19" selection-start="15829" selection-end="15829" vertical-scroll-proportion="0.33333334" vertical-offset="7309" max-vertical-offset="20790">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="0" selection-start="4442" selection-end="4442" vertical-scroll-proportion="4.311978" vertical-offset="648" max-vertical-offset="2880">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="19" selection-start="9762" selection-end="9762" vertical-scroll-proportion="0.47611466" vertical-offset="4273" max-vertical-offset="6678">
+        <state line="81" column="82" selection-start="3949" selection-end="3993" vertical-scroll-proportion="3.0990567" vertical-offset="0" max-vertical-offset="6804">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/TrainingDataHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0" vertical-offset="291" max-vertical-offset="864">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.64935064" vertical-offset="168" max-vertical-offset="630">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="47" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="2682">
+          <folding>
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="46" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0" vertical-offset="769" max-vertical-offset="4500">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="38" selection-start="6109" selection-end="6109" vertical-scroll-proportion="0.0" vertical-offset="2623" max-vertical-offset="7524">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="35" selection-start="456" selection-end="456" vertical-scroll-proportion="0.54545456" vertical-offset="0" max-vertical-offset="522">
           <folding />
         </state>
       </provider>

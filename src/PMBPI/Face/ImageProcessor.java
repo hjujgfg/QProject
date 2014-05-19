@@ -135,7 +135,7 @@ public class ImageProcessor {
             if (img == null) return null;
             return robustReadBufferedImage(img, width, height);
         }
-        return null;
+        return result;
     }
     public int[] robustReadBufferedImage(BufferedImage image, int width, int height) {
         if (!isImageParamsCorrect(image, width, height)) return null;
