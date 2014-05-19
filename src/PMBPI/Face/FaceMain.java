@@ -8,13 +8,13 @@ public class FaceMain {
         /*int[] nums = {22, 32, 30, 7, 12, 13, 14, 15};
         int[] fs = {1, 2};*/
         int[] nums = {1, 2, 3, 4, 5};
-        int[] fs = {1, 2};
+        int[] fs = {1, 2, 3};
         int [][] training = Eigenface.readFaces(nums, fs);
 
         /*int[] n1 = {22, 32, 30, 7, 12, 13, 14, 15, 16, 35, 36, 37, 38, 39, 40};
         int[] fs1 = {3, 4, 5, 6};*/
         int[] n1 = {1, 2, 3, 4, 5};
-        int[] fs1 = {3, 4, 5};
+        int[] fs1 = {4, 5, 6};
         int[][] I = Eigenface.readFaces(n1, fs1);
         Eigenface.localMain(training, I, 92, 112);
 

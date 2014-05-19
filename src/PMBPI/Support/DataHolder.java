@@ -34,8 +34,8 @@ public class DataHolder {
         DataHolder dh = new DataHolder();
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 5;
-        int test = 5;
+        int train = 15;
+        int test = 24;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 2; j ++) {
@@ -52,10 +52,10 @@ public class DataHolder {
             dh.addPerson("pers#" + (i+1), perFaces[i], perVoices[i]);
         }
 
-        String[][] perFacest = new String[test][2];
+        String[][] perFacest = new String[test][3];
         for (int i = 0; i < test; i ++) {
-            for (int j = 0; j < 2; j ++) {
-                perFacest[i][j] = "faces/s" + (i+1) + "/" + (j+1) + ".pgm";
+            for (int j = 0; j < 3; j ++) {
+                perFacest[i][j] = "faces/s" + (i+1) + "/" + (j+3) + ".pgm";
             }
         }
         String[][] perVoicest = new String[test][3];
@@ -68,21 +68,38 @@ public class DataHolder {
         TrainingDataHolder tdh = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
         tdh.save();
 
-        double[][] results = new double[test * 2][];
+        double[][] results = new double[test * 3][];
         int j = 0;
-        for (int i = 0; i < results.length; i +=2) {
+        for (int i = 0; i < results.length; i +=3) {
             results[i] = dh.recognize(perFacest[j][0], perVoicest[j]);
             results[i + 1] = dh.recognize(perFacest[j][1], perVoicest[j]);
-            //results[i + 2] = dh.recognize(perFacest[j][2], perVoicest[j]);
+            results[i + 2] = dh.recognize(perFacest[j][2], perVoicest[j]);
             j ++;
         }
-
+        int i = 0;
         for (double[] d : results) {
-            for (double dd : d) {
+            System.out.println();
+            System.out.println("test# " + i);
+            int facepn = dh.personFacesNumbers.get((int)d[1]);
+            int voicepn = dh.personVoicesNumbers.get((int)d[3]);
+            System.out.print("P-face: " + dh.people.get(facepn).getName() + " " +d[0] + "\n");
+            System.out.print("P-voice: " + dh.people.get(voicepn).getName() + " " + d[2] + "\n");
+            System.out.println("---------------------------");
+            i ++;
+            /*for (double dd : d) {
                 System.out.print(dd + " ");
             }
-            System.out.println();
+            System.out.println("__________________________________________________");*/
+
         }
+        /*for (int o : dh.personFacesNumbers) {
+            System.out.print(o + " ");
+        }
+        System.out.println();
+        for (int o : dh.personVoicesNumbers) {
+            System.out.print(o + " ");
+        }*/
+        System.out.println();
     }
 
     public DataHolder() {

@@ -87,6 +87,10 @@ public class Person {
         return trainingVoices.size();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int[][] getFaceMatrix() {
         int[][] matrix = new int[trainingFaces.size()][];
         int i = 0;

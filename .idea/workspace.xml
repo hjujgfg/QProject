@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc8c40ab-d7a4-4002-85db-3d18ff37e84c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PMBPI/Face/TrainingDataHolder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" afterPath="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" afterPath="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Support/Person.java" afterPath="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" afterPath="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faces/eigenface.c" afterPath="$PROJECT_DIR$/faces/eigenface.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faces/facedata.xml" afterPath="$PROJECT_DIR$/faces/facedata.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/faces/test.txt" afterPath="$PROJECT_DIR$/faces/test.txt" />
@@ -114,7 +110,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" line="185" class="PMBPI.Support.DataHolder" package="PMBPI.Support">
+      <breakpoint url="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" line="202" class="PMBPI.Support.DataHolder" package="PMBPI.Support">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -169,6 +165,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="WebCamFrame.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PMBPI/WebCamFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="38" selection-start="878" selection-end="878" vertical-scroll-proportion="0.0" vertical-offset="307" max-vertical-offset="990">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Eigenface.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -178,11 +183,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FaceMain.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FaceMain.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="35" selection-start="456" selection-end="456" vertical-scroll-proportion="0.54545456" vertical-offset="0" max-vertical-offset="522">
+            <state line="17" column="18" selection-start="545" selection-end="545" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageProcessor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="123" column="0" selection-start="4471" selection-end="4471" vertical-scroll-proportion="0.0" vertical-offset="2060" max-vertical-offset="2880">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -190,7 +206,7 @@
       <file leaf-file-name="DataHolder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="46" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0" vertical-offset="769" max-vertical-offset="4500">
+            <state line="28" column="22" selection-start="736" selection-end="736" vertical-scroll-proportion="76.03333" vertical-offset="2677" max-vertical-offset="4806">
               <folding />
             </state>
           </provider>
@@ -199,11 +215,22 @@
       <file leaf-file-name="Person.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="47" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="2682">
+            <state line="90" column="20" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0" vertical-offset="1045" max-vertical-offset="2754">
               <folding>
                 <element signature="e#823#824#0" expanded="true" />
                 <element signature="e#855#856#0" expanded="true" />
+                <element signature="e#2708#2709#0" expanded="true" />
+                <element signature="e#2735#2736#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="9" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.94736844" vertical-offset="0" max-vertical-offset="630">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -246,15 +273,15 @@
         <option value="$PROJECT_DIR$/src/PMBPI/FaceTestMainFrame.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/WebCamFrame.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/VoiceProcessor.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Face/TrainingDataHolder.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Voice/VoiceMain.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
-        <option value="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
         <option value="$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Support/Person.java" />
+        <option value="$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
@@ -389,27 +416,9 @@
               <option name="myItemId" value="PMBPI" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="VoiceVerificator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PMBPI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Voice" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="WebCamFrame" />
+              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -427,10 +436,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="PMBPI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Face" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -466,14 +471,14 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="PMBPI.Face" />
-    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="junit.framework.TestCase" />
     </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="PMBPI.Face" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.DataHolder">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PMBPI.Face.FaceMain" />
       <option name="VM_PARAMETERS" value="" />
@@ -708,8 +713,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="Application.DataHolder" />
+        <item index="0" class="java.lang.String" itemvalue="Application.DataHolder" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Main" />
         <item index="2" class="java.lang.String" itemvalue="Application.VoiceMain" />
         <item index="3" class="java.lang.String" itemvalue="Application.WebCamFrame" />
         <item index="4" class="java.lang.String" itemvalue="Application.FaceTestMainFrame" />
@@ -798,7 +803,11 @@
       <created>1400415835789</created>
       <updated>1400415835789</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Further combination&#10;">
+      <created>1400501264599</created>
+      <updated>1400501264599</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -855,7 +864,8 @@
     <MESSAGE value="Something" />
     <MESSAGE value="I don't remember what's going on here&#10;" />
     <MESSAGE value="Tests for new dataset ! error on 18 tests :OOOO&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests for new dataset ! error on 18 tests :OOOO&#10;" />
+    <MESSAGE value="Further combination&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Further combination&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1089,13 +1099,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/WebCamFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="38" selection-start="878" selection-end="878" vertical-scroll-proportion="0.0" vertical-offset="307" max-vertical-offset="990">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Voice/FeatureExtract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="0" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="2538">
@@ -1107,15 +1110,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="438" column="19" selection-start="15829" selection-end="15829" vertical-scroll-proportion="0.33333334" vertical-offset="7309" max-vertical-offset="20790">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="0" selection-start="4442" selection-end="4442" vertical-scroll-proportion="4.311978" vertical-offset="648" max-vertical-offset="2880">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1135,30 +1129,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.64935064" vertical-offset="168" max-vertical-offset="630">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="47" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.0" vertical-offset="546" max-vertical-offset="2682">
-          <folding>
-            <element signature="e#823#824#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="46" selection-start="2232" selection-end="2232" vertical-scroll-proportion="0.0" vertical-offset="769" max-vertical-offset="4500">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/Eigenface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="164" column="38" selection-start="6109" selection-end="6109" vertical-scroll-proportion="0.0" vertical-offset="2623" max-vertical-offset="7524">
@@ -1168,7 +1138,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/FaceMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="35" selection-start="456" selection-end="456" vertical-scroll-proportion="0.54545456" vertical-offset="0" max-vertical-offset="522">
+        <state line="17" column="18" selection-start="545" selection-end="545" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="522">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Face/ImageProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="0" selection-start="4471" selection-end="4471" vertical-scroll-proportion="0.0" vertical-offset="2060" max-vertical-offset="2880">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="20" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0" vertical-offset="1045" max-vertical-offset="2754">
+          <folding>
+            <element signature="e#823#824#0" expanded="true" />
+            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#2708#2709#0" expanded="true" />
+            <element signature="e#2735#2736#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/Support/DataHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="22" selection-start="736" selection-end="736" vertical-scroll-proportion="76.03333" vertical-offset="2677" max-vertical-offset="4806">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PMBPI/WebCamFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="38" selection-start="878" selection-end="878" vertical-scroll-proportion="0.0" vertical-offset="307" max-vertical-offset="990">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="9" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.94736844" vertical-offset="0" max-vertical-offset="630">
           <folding />
         </state>
       </provider>
