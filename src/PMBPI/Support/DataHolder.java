@@ -262,6 +262,4 @@ public class DataHolder {
         }
         return identResult;
     }
-
-
 }

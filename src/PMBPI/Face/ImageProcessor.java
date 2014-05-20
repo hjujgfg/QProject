@@ -151,4 +151,18 @@ public class ImageProcessor {
             return null;
         }
     }
+    public int[] extractInnerImage(BufferedImage grayImage, int width, int height) {
+        int[] result = new int[width * height];
+        int horizontal = (grayImage.getWidth() - width) / 2;
+        int vertical = (grayImage.getHeight() - height) / 2;
+        int i = 0;
+        Raster r = grayImage.getRaster();
+        for (int y = 0; y < height; y ++) {
+            for (int x = 0; x < width; x ++) {
+                result[i] = r.getSample(x+horizontal, y + vertical, 0);
+                i ++;
+            }
+        }
+        return result;
+    }
 }
