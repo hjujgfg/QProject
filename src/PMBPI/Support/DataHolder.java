@@ -5,13 +5,14 @@ import PMBPI.Face.ImageProcessor;
 import PMBPI.Face.TrainingDataHolder;
 import PMBPI.Voice.VoiceMain;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 
 /**
  * Created by egor on 5/14/14.
  */
-public class DataHolder {
+public class DataHolder implements Serializable{
 
     public static int IMG_WIDTH;
     public static int IMG_HEIGHT;
@@ -29,13 +30,13 @@ public class DataHolder {
     ArrayList<Integer> personFacesNumbers;
     ArrayList<Integer> personVoicesNumbers;
 
-    ImageProcessor imageProcessor;
+    //ImageProcessor imageProcessor;
     public static void main(String[] args) {
         DataHolder dh = new DataHolder();
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 15;
-        int test = 24;
+        int train = 3;
+        int test = 5;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 2; j ++) {
@@ -55,7 +56,7 @@ public class DataHolder {
         String[][] perFacest = new String[test][3];
         for (int i = 0; i < test; i ++) {
             for (int j = 0; j < 3; j ++) {
-                perFacest[i][j] = "faces/s" + (i+1) + "/" + (j+3) + ".pgm";
+                perFacest[i][j] = "faces/s" + (i+1) + "/" + (j+6) + ".pgm";
             }
         }
         String[][] perVoicest = new String[test][3];
@@ -102,11 +103,17 @@ public class DataHolder {
         System.out.println();
     }
 
+
+
     public DataHolder() {
-        imageProcessor = new ImageProcessor();
+        //imageProcessor = new ImageProcessor();
         people = new ArrayList<Person>();
         personFacesNumbers = new ArrayList<Integer>();
         personVoicesNumbers = new ArrayList<Integer>();
+    }
+
+    public ArrayList<Person> getPeople() {
+        return people;
     }
 
     public int addPerson(String name, File face, File voice) {
@@ -128,8 +135,9 @@ public class DataHolder {
             res = p.addFace(f);
             if (res != SUCCESS) return res;
         }
-
+        p.setUserPic(new File(faces[0]));
         res = p.addMultVoicesForOneSample(voices);
+
         //int [][] matrix = collectFaceMatrix();
 
         //TrainingDataHolder trainingDataHolder = Eigenface.train(matrix, IMG_WIDTH, IMG_HEIGHT);
@@ -199,7 +207,7 @@ public class DataHolder {
         return SUCCESS;
     }
 
-    private int[][] collectFaceMatrix() {
+    public int[][] collectFaceMatrix() {
         int[][] matrix;
         ArrayList<int[]> preMatrix = new ArrayList<int[]>();
         personFacesNumbers.clear();
@@ -261,5 +269,52 @@ public class DataHolder {
             identResult[i+faceRes.length] = voiceRecRes[i];
         }
         return identResult;
+    }
+    public Person identifyByImage(BufferedImage image) {
+        ImageProcessor processor = new ImageProcessor();
+        int[] face = processor.extractInnerImage(image, IMG_WIDTH, IMG_HEIGHT);
+        //int [] face = processor.robustReadBufferedImage(image, IMG_WIDTH, IMG_HEIGHT);
+        TrainingDataHolder saved = TrainingDataHolder.load();
+        double[] res = Eigenface.recognizeSingle(face, saved);
+        int facepn = personFacesNumbers.get((int)res[1]);
+        return people.get(facepn);
+    }
+
+    public void save() {
+        try {
+            File f = new File("data/dataholder.ser");
+            FileOutputStream fos = new FileOutputStream(f);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this);
+            fos.flush();
+            fos.close();
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static DataHolder restore() {
+        try {
+            File f = new File("data/dataholder.ser");
+            FileInputStream fis = new FileInputStream(f);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            DataHolder dh = (DataHolder) ois.readObject();
+            int[][] matrix = dh.collectFaceMatrix();
+            TrainingDataHolder tdh = Eigenface.train(matrix, IMG_WIDTH, IMG_HEIGHT);
+            tdh.save();
+            return dh;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

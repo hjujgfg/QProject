@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by egor on 5/14/14.
  */
-public class Person {
+public class Person implements Serializable{
     public static final int FACE = 1;
     public static final int VOICE = 2;
 
@@ -90,6 +90,8 @@ public class Person {
     public String getName() {
         return name;
     }
+
+    public File getUserPic() { return userPic; }
 
     public int[][] getFaceMatrix() {
         int[][] matrix = new int[trainingFaces.size()][];

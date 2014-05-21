@@ -3,6 +3,7 @@ package PMBPI.Face;
 import PMBPI.Support.DataHolder;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -13,7 +14,7 @@ import java.io.*;
 /**
  * Created by egor on 5/17/14.
  */
-public class ImageProcessor {
+public class ImageProcessor implements Serializable{
     public ImageProcessor () {
 
     }
@@ -105,8 +106,8 @@ public class ImageProcessor {
     }
     private int[] readBufferedImage(BufferedImage image) {
         int [] imageArray = new int[image.getWidth() * image.getHeight()];
-        RescaleOp rescaleOp = new RescaleOp(1.35f, 15, null);
-        rescaleOp.filter(image, image);
+        /*RescaleOp rescaleOp = new RescaleOp(1.35f, 15, null);
+        rescaleOp.filter(image, image);*/
         BufferedImage grayScale = convertToGrayScale(image);
         Raster raster = image.getData();
         int i = 0;
@@ -118,6 +119,12 @@ public class ImageProcessor {
             }
         }
         return imageArray;
+    }
+    public BufferedImage rescaleImageBrightness(BufferedImage image, float scaleFactor, float offset) {
+        RescaleOp rescaleOp = new RescaleOp(scaleFactor, offset, null);
+        BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+        rescaleOp.filter(image, result);
+        return result;
     }
     public int[] readFaceFromFile(String path, int width, int height) {
         int[] result = null;

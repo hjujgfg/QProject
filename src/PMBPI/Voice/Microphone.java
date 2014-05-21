@@ -13,15 +13,16 @@ public class Microphone {
     private AudioFormat format;
     private AudioFileFormat.Type fileType;
     private File wavFile;
-
-    private void initialize() {
-        format = new AudioFormat(16000.0f, 16, 2, true, true);
+    public Microphone(String file) {
+        initialize(file);
+    }
+    private void initialize(String file) {
+        format = new AudioFormat(16000.0f, 16, 1, true, true);
         fileType = AudioFileFormat.Type.WAVE;
         info = new DataLine.Info(TargetDataLine.class, format);
-        wavFile = new File("wavFile.wav");
+        wavFile = new File(file);
     }
     public void start() {
-        initialize();
         try {
             if (!AudioSystem.isLineSupported(info)) {
                 System.out.print("Line not supported");
