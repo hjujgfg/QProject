@@ -22,6 +22,7 @@ public class Microphone {
         info = new DataLine.Info(TargetDataLine.class, format);
         wavFile = new File(file);
     }
+
     public void start() {
         try {
             if (!AudioSystem.isLineSupported(info)) {

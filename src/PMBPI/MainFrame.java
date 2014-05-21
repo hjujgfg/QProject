@@ -7,6 +7,7 @@ import PMBPI.Face.TrainingDataHolder;
 import PMBPI.Support.DataHolder;
 import PMBPI.Support.Person;
 import PMBPI.Voice.Microphone;
+import PMBPI.Voice.VoiceMain;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import org.apache.commons.math3.linear.ArrayRealVector;
@@ -16,10 +17,7 @@ import org.apache.log4j.BasicConfigurator;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -38,8 +36,9 @@ public class MainFrame extends JFrame{
     private JButton catureImageButton;
     private JPanel IdentifiedFacePanel;
     private JPanel dataSetPanel;
-    private JLabel voceCaptureLabel;
+    private JLabel voiceCaptureLabel;
     private JPanel testSignalPanel;
+    private JPanel voiceStatusLabel;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -49,6 +48,7 @@ public class MainFrame extends JFrame{
     DataHolder dataHolder;
     Thread realTimeFaceIdentificationThread;
     Thread soundCaptureThread;
+    Microphone mic;
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
@@ -68,6 +68,49 @@ public class MainFrame extends JFrame{
                 }
             }
         });
+        voiceCaptureLabel.requestFocus();
+        voiceCaptureLabel.addKeyListener( new KeyListener() {
+            boolean recording = false;
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!recording) {
+                    if (e.getKeyChar() == 'k') {
+                        voiceCaptureLabel.setText("Идет запись");
+                        soundCaptureThread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mic.start();
+                            }
+                        });
+                        soundCaptureThread.start();
+                        recording = true;
+                    }
+                }  else {
+                    if (e.getKeyChar() == 'k') {
+                        mic.stop();
+                        soundCaptureThread.interrupt();
+                        double[] d = VoiceMain.getCentroidOfRecording("data/~tmp.wav", 16, 16000);
+                        CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
+                        testSignalPanel.removeAll();
+                        testSignalPanel.add(pnl);
+                        testSignalPanel.revalidate();
+                        testSignalPanel.repaint();
+                        recording = false;
+                    }
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
         dataHolder = DataHolder.restore();
         if (dataHolder == null) {
             dataHolder = new DataHolder();
@@ -75,7 +118,7 @@ public class MainFrame extends JFrame{
         }
         dataHolder.setIMGDimensions(92, 112);
         dataHolder.setSoundCapureParams(16, 16000);
-
+        mic = new Microphone("data/~tmp.wav");
         String[] voice = {"audio_data/16khz_16bit/1/7.wav"};
         webcam = Webcam.getDefault();
         webcam.setViewSize(new Dimension(176, 144));
@@ -137,13 +180,14 @@ public class MainFrame extends JFrame{
         soundCaptureThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                    
+                mic.start();
             }
         });
         dataSetPanel.setLayout(new GridBagLayout());
         for (Person p : dataHolder.getPeople()) {
             dataSetPanel.add(new PreviewPanel(p.getUserPic()));
         }
+        testSignalPanel.setLayout(new GridBagLayout());
 
     }
     private void trainDataHolder(DataHolder dh) {

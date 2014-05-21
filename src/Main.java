@@ -16,7 +16,7 @@ public class Main {
         System.out.print("Hello again!");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try{
-            final Microphone m = new Microphone();
+            final Microphone m = new Microphone("test.wav");
             String t = br.readLine();
             if (t.equals("k"))
                 flag = false;
