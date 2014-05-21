@@ -16,6 +16,8 @@ import org.apache.log4j.BasicConfigurator;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -39,6 +41,12 @@ public class MainFrame extends JFrame{
     private JLabel voiceCaptureLabel;
     private JPanel testSignalPanel;
     private JPanel voiceStatusLabel;
+    private JTextField textField1;
+    private JButton addPersonButton;
+    private JButton chooseImageFile;
+    private JButton captureImageButton;
+    private JButton выбратьЗвуковойФайлButton;
+    private JPanel newPersonImagesPanel;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -71,15 +79,18 @@ public class MainFrame extends JFrame{
         voiceCaptureLabel.requestFocus();
         voiceCaptureLabel.addKeyListener( new KeyListener() {
             boolean recording = false;
+            int i = 0;
+            Microphone microphone;
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!recording) {
                     if (e.getKeyChar() == 'k') {
+                        microphone = new Microphone("data/"+i+".wav");
                         voiceCaptureLabel.setText("Идет запись");
                         soundCaptureThread = new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                mic.start();
+                                microphone.start();
                             }
                         });
                         soundCaptureThread.start();
@@ -87,9 +98,12 @@ public class MainFrame extends JFrame{
                     }
                 }  else {
                     if (e.getKeyChar() == 'k') {
-                        mic.stop();
+                        microphone.stop();
+                        i++;
                         soundCaptureThread.interrupt();
-                        double[] d = VoiceMain.getCentroidOfRecording("data/~tmp.wav", 16, 16000);
+                        double[] d = VoiceMain.getCentroidOfRecording("data/"+(i-1)+".wav", 16, 16000);
+                        double[] d1 = VoiceMain.getCentroidOfRecording("data/1.wav", 16, 16000);
+                        double[] d2 = VoiceMain.getCentroidOfRecording("audio_data/16khz_16bit/1/1.wav", 16, 16000);
                         CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
                         testSignalPanel.removeAll();
                         testSignalPanel.add(pnl);
@@ -189,6 +203,31 @@ public class MainFrame extends JFrame{
         }
         testSignalPanel.setLayout(new GridBagLayout());
 
+        newPersonImagesPanel.setLayout(new GridBagLayout());
+
+        chooseImageFile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+
+                FileFilter filter = new FileNameExtensionFilter(
+                        "Face image files (*.pgm), (*.png)", "pgm", "png");
+                chooser.setFileFilter(filter);
+                chooser.setMultiSelectionEnabled(true);
+                int returnVal = chooser.showOpenDialog(MainFrame.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File[] files = chooser.getSelectedFiles();
+                    for (File f : files) {
+                        try {
+                            newPersonImagesPanel.add(new PreviewPanel(f));
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
+                        }
+                    }
+                }
+            }
+        });
     }
     private void trainDataHolder(DataHolder dh) {
         dh.setIMGDimensions(92, 112);
@@ -249,10 +288,18 @@ public class MainFrame extends JFrame{
 
         public PreviewPanel(File f) {
             try {
-                PGMReaderAlt readerAlt = new PGMReaderAlt(f);
-                image = readerAlt.read();
-                this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-                pathToImage = f;
+                if (f.getPath().endsWith("pgm")) {
+                    PGMReaderAlt readerAlt = new PGMReaderAlt(f);
+                    image = readerAlt.read();
+                    this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                    pathToImage = f;
+                } else if (f.getPath().endsWith("png")) {
+                    ImageProcessor processor = new ImageProcessor();
+                    BufferedImage tmp = processor.robustReadPNG(f.getPath(), DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
+                    image = processor.convertToGrayScale(tmp);
+                    this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                    pathToImage = f;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -263,6 +310,7 @@ public class MainFrame extends JFrame{
             super.paintComponent(g);
             g.drawImage(image, 0, 0, null); // see javadoc for more info on the parameters
         }
+
     }
 
     private class CepstraPreviewPanel extends JPanel{
@@ -278,6 +326,7 @@ public class MainFrame extends JFrame{
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+            if (coefs == null) return;
             RealVector rv = new ArrayRealVector(coefs);
             int max = (int)rv.getMaxValue();
             int interval = (width - 5) / coefs.length;

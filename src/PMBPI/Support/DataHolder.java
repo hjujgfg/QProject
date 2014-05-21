@@ -46,7 +46,7 @@ public class DataHolder implements Serializable{
         String[][] perVoices = new String[train][7];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 7; j ++) {
-                perVoices[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+j+".wav";
+                perVoices[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+(j) +".wav";
             }
         }
         for (int i = 0; i < train; i ++) {
@@ -62,7 +62,7 @@ public class DataHolder implements Serializable{
         String[][] perVoicest = new String[test][3];
         for (int i = 0; i < test; i ++) {
             for (int j = 0; j < 3; j ++) {
-                perVoicest[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+(j+7)+".wav";
+                perVoicest[i][j] = "audio_data/16khz_16bit/"+(i+1)+"/"+(j+6)+".wav";
             }
         }
         int[][] matr = dh.collectFaceMatrix();

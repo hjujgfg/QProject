@@ -158,6 +158,11 @@ public class ImageProcessor implements Serializable{
             return null;
         }
     }
+    public BufferedImage robustReadPNG(String path, int width, int height) {
+        BufferedImage image = readPNG(path);
+        if (image.getWidth() != width || image.getHeight() != height) return null;
+        return image;
+    }
     public int[] extractInnerImage(BufferedImage grayImage, int width, int height) {
         int[] result = new int[width * height];
         int horizontal = (grayImage.getWidth() - width) / 2;
