@@ -16,6 +16,7 @@ import org.apache.log4j.BasicConfigurator;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -23,8 +24,6 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
-
 
 
 /**
@@ -35,7 +34,7 @@ public class MainFrame extends JFrame{
     private JPanel MainPanel;
     private JTabbedPane tabbedPane1;
     private JPanel CameraPlace;
-    private JButton catureImageButton;
+    private JButton selectFaceForIdentificationBtn;
     private JPanel IdentifiedFacePanel;
     private JPanel dataSetPanel;
     private JLabel voiceCaptureLabel;
@@ -47,6 +46,9 @@ public class MainFrame extends JFrame{
     private JButton captureImageButton;
     private JButton выбратьЗвуковойФайлButton;
     private JPanel newPersonImagesPanel;
+    private JButton selectVoiceForIdentificationBtn;
+    private JPanel newPersonVoicesPanel;
+    private JPanel selectedDataPanel;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -56,7 +58,7 @@ public class MainFrame extends JFrame{
     DataHolder dataHolder;
     Thread realTimeFaceIdentificationThread;
     Thread soundCaptureThread;
-    Microphone mic;
+
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
@@ -102,8 +104,6 @@ public class MainFrame extends JFrame{
                         i++;
                         soundCaptureThread.interrupt();
                         double[] d = VoiceMain.getCentroidOfRecording("data/"+(i-1)+".wav", 16, 16000);
-                        double[] d1 = VoiceMain.getCentroidOfRecording("data/1.wav", 16, 16000);
-                        double[] d2 = VoiceMain.getCentroidOfRecording("audio_data/16khz_16bit/1/1.wav", 16, 16000);
                         CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
                         testSignalPanel.removeAll();
                         testSignalPanel.add(pnl);
@@ -132,8 +132,7 @@ public class MainFrame extends JFrame{
         }
         dataHolder.setIMGDimensions(92, 112);
         dataHolder.setSoundCapureParams(16, 16000);
-        mic = new Microphone("data/~tmp.wav");
-        String[] voice = {"audio_data/16khz_16bit/1/7.wav"};
+        //mic = new Microphone("data/~tmp.wav");
         webcam = Webcam.getDefault();
         webcam.setViewSize(new Dimension(176, 144));
         CameraPlace.setLayout(new GridBagLayout());
@@ -143,7 +142,7 @@ public class MainFrame extends JFrame{
         CameraPlace.add(webcamPanel);
 
         setVisible(true);
-        catureImageButton.addActionListener(new ActionListener() {
+        selectFaceForIdentificationBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BufferedImage image = webcam.getImage();
@@ -191,16 +190,10 @@ public class MainFrame extends JFrame{
 
         realTimeFaceIdentificationThread.start();
 
-        soundCaptureThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mic.start();
-            }
-        });
-        dataSetPanel.setLayout(new GridBagLayout());
+        /*dataSetPanel.setLayout(new GridBagLayout());
         for (Person p : dataHolder.getPeople()) {
             dataSetPanel.add(new PreviewPanel(p.getUserPic()));
-        }
+        }*/
         testSignalPanel.setLayout(new GridBagLayout());
 
         newPersonImagesPanel.setLayout(new GridBagLayout());
@@ -214,6 +207,8 @@ public class MainFrame extends JFrame{
                         "Face image files (*.pgm), (*.png)", "pgm", "png");
                 chooser.setFileFilter(filter);
                 chooser.setMultiSelectionEnabled(true);
+                File currentdir = new File(System.getProperty("user.dir"));
+                chooser.setCurrentDirectory(currentdir);
                 int returnVal = chooser.showOpenDialog(MainFrame.this);
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -221,11 +216,31 @@ public class MainFrame extends JFrame{
                     for (File f : files) {
                         try {
                             newPersonImagesPanel.add(new PreviewPanel(f));
+                            newPersonImagesPanel.revalidate();
+                            newPersonImagesPanel.repaint();
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
                         }
                     }
                 }
+            }
+        });
+        captureImageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        selectFaceForIdentificationBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        selectVoiceForIdentificationBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
@@ -292,6 +307,7 @@ public class MainFrame extends JFrame{
                     PGMReaderAlt readerAlt = new PGMReaderAlt(f);
                     image = readerAlt.read();
                     this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                    this.setBorder(new EmptyBorder(1, 2, 1, 2));
                     pathToImage = f;
                 } else if (f.getPath().endsWith("png")) {
                     ImageProcessor processor = new ImageProcessor();
@@ -303,7 +319,40 @@ public class MainFrame extends JFrame{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    try {
+                        newPersonImagesPanel.remove(PreviewPanel.this);
+                        newPersonImagesPanel.revalidate();
+                        newPersonImagesPanel.repaint();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
+
 
         @Override
         protected void paintComponent(Graphics g) {
@@ -318,7 +367,7 @@ public class MainFrame extends JFrame{
         int width;
         int height;
         public CepstraPreviewPanel(double [] coefficients, int width, int height) {
-            coefs = coefficients;
+            coefs = coefficients.clone();
             this.width = width;
             this.height = height;
             this.setPreferredSize(new Dimension(width, height));
@@ -327,14 +376,19 @@ public class MainFrame extends JFrame{
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             if (coefs == null) return;
+
             RealVector rv = new ArrayRealVector(coefs);
+            rv = rv.mapMultiply(10);
+            int min = (int) rv.getMinValue();
+            min --;
+            rv = rv.mapAdd(-min);
             int max = (int)rv.getMaxValue();
             int interval = (width - 5) / coefs.length;
             for (int i = 0; i < coefs.length; i ++) {
-                g.drawRect(i * interval, (int) (coefs[i] * (height - 10) / max), 2, 2);
+                g.drawRect((i+1) * interval, (int) (rv.getEntry(i) * (height - 10) / max), 2, 2);
             }
-            g.drawLine(3, 0, 0, height);
-            g.drawLine(3, height, width, height);
+            g.drawLine(1, height-1, 1, 1);
+            g.drawLine(1, height-1, width, height-1);
         }
     }
 }
