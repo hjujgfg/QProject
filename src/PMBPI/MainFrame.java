@@ -14,7 +14,6 @@ import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.log4j.BasicConfigurator;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
@@ -44,11 +43,12 @@ public class MainFrame extends JFrame{
     private JButton addPersonButton;
     private JButton chooseImageFile;
     private JButton captureImageButton;
-    private JButton выбратьЗвуковойФайлButton;
+    private JButton chooseVoiceFileButton;
     private JPanel newPersonImagesPanel;
     private JButton selectVoiceForIdentificationBtn;
     private JPanel newPersonVoicesPanel;
     private JPanel selectedDataPanel;
+    private JButton startCustomIdentificationBtn;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -57,8 +57,17 @@ public class MainFrame extends JFrame{
     final Webcam webcam;
     DataHolder dataHolder;
     Thread realTimeFaceIdentificationThread;
+    boolean realTimeIdentificationThreadIsRunning;
     Thread soundCaptureThread;
 
+    File selectedTestingImage;
+    File selectedTestingVoice;
+    double [] selectedVoiceCepstras;
+    PreviewPanel selectedFaceForIdentification;
+    CepstraPreviewPanel selectedVoiceForIdentification;
+
+
+    int newPersonImageIndex;
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
@@ -78,6 +87,7 @@ public class MainFrame extends JFrame{
                 }
             }
         });
+        newPersonImageIndex = 0;
         voiceCaptureLabel.requestFocus();
         voiceCaptureLabel.addKeyListener( new KeyListener() {
             boolean recording = false;
@@ -142,29 +152,14 @@ public class MainFrame extends JFrame{
         CameraPlace.add(webcamPanel);
 
         setVisible(true);
-        selectFaceForIdentificationBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                BufferedImage image = webcam.getImage();
-                try {
-                    ImageIO.write(image, "PNG", new File("test.png"));
-                    ImageIcon icon = new ImageIcon("test.png");
-                    ImageProcessor processor = new ImageProcessor();
-                    processor.writePGM(image, new File("test.pgm"));
-                    image = processor.rescaleImageBrightness(image, 1.3f, 15);
-                    BufferedImage gray = processor.convertToGrayScale(image);
-                    Eigenface.writeToPGM(processor.extractInnerImage(gray, 92, 112), 92, 112, "teteteteteest.pgm");
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
+
         IdentifiedFacePanel.setLayout(new GridBagLayout());
+        realTimeIdentificationThreadIsRunning = true;
         realTimeFaceIdentificationThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    while (true){
+                    while (realTimeIdentificationThreadIsRunning){
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException e) {
@@ -180,7 +175,6 @@ public class MainFrame extends JFrame{
                         IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
                         IdentifiedFacePanel.revalidate();
                         IdentifiedFacePanel.repaint();
-
                     }
                 } catch (Exception e ) {
                     e.printStackTrace();
@@ -225,24 +219,142 @@ public class MainFrame extends JFrame{
                 }
             }
         });
-        captureImageButton.addActionListener(new ActionListener() {
+        chooseVoiceFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JFileChooser chooser = new JFileChooser();
+
+                FileFilter filter = new FileNameExtensionFilter(
+                        "Voice audio file, (*.wav)", "wav");
+                chooser.setFileFilter(filter);
+                File currentdir = new File(System.getProperty("user.dir"));
+                chooser.setCurrentDirectory(currentdir);
+                chooser.setMultiSelectionEnabled(true);
+                int returnVal = chooser.showOpenDialog(MainFrame.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File[] files = chooser.getSelectedFiles();
+                    String[] fis = new String[files.length];
+                    int i = 0;
+                    for (File f : files) {
+                        fis[i] = f.getPath();
+                        i ++;
+                    }
+                    i = 0;
+                    //TODO!!
+                }
             }
         });
+        captureImageButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BufferedImage image = webcam.getImage();
+                    ImageProcessor processor = new ImageProcessor();
+                    image = processor.rescaleImageBrightness(image, 1.35f, 15);
+                    image = processor.convertToGrayScale(image);
+                    int [] res = processor.extractInnerImage(image, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
+                    Eigenface.writeToPGM(res, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT, "data/temp" + newPersonImageIndex+".pgm");
+                    newPersonImagesPanel.add(new PreviewPanel(new File("data/temp" + newPersonImageIndex+".pgm")));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+        selectedDataPanel.setLayout(new GridBagLayout());
         selectFaceForIdentificationBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                JFileChooser chooser = new JFileChooser();
+
+                FileFilter filter = new FileNameExtensionFilter(
+                        "Face image files (*.pgm), (*.png)", "pgm", "png");
+                chooser.setFileFilter(filter);
+                File currentdir = new File(System.getProperty("user.dir"));
+                chooser.setCurrentDirectory(currentdir);
+                int returnVal = chooser.showOpenDialog(MainFrame.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File f = chooser.getSelectedFile();
+                    try {
+                        try {
+                            selectedDataPanel.remove(selectedFaceForIdentification);
+                        } catch (Exception ex) {}
+
+                        selectedFaceForIdentification = new PreviewPanel(f);
+                        selectedDataPanel.add(selectedFaceForIdentification);
+                        selectedTestingImage = f;
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
+                    }
+                }
             }
         });
         selectVoiceForIdentificationBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
 
+                FileFilter filter = new FileNameExtensionFilter(
+                        "Voice audio file, (*.wav)", "wav");
+                chooser.setFileFilter(filter);
+                File currentdir = new File(System.getProperty("user.dir"));
+                chooser.setCurrentDirectory(currentdir);
+                int returnVal = chooser.showOpenDialog(MainFrame.this);
+
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File f = chooser.getSelectedFile();
+                    try {
+                        try {
+                            selectedDataPanel.remove(selectedVoiceForIdentification);
+                        } catch (Exception ex) {}
+
+                        selectedVoiceCepstras = VoiceMain.getCentroidOfRecording(f.getPath(), DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                        selectedVoiceForIdentification = new CepstraPreviewPanel(selectedVoiceCepstras, 200, 100);
+                        selectedDataPanel.add(selectedVoiceForIdentification);
+                        selectedTestingVoice = f;
+                    }catch (Exception ex) {
+                        JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
+                    }
+                }
             }
         });
+        startCustomIdentificationBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (selectedTestingImage == null) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Выберите корректный файл изображения лица");
+                    return;
+                }
+                if (selectedVoiceCepstras == null) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Выберите корректную запись голоса");
+                    return;
+                }
+                realTimeIdentificationThreadIsRunning = false;
+                Person p = doIdentification();
+                if (p == null) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Такого человека нет в выборке");
+                } else {
+                    IdentifiedFacePanel.removeAll();
+                    try {
+                        IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                    IdentifiedFacePanel.revalidate();
+                    IdentifiedFacePanel.repaint();
+                }
+            }
+        });
+
+    }
+
+    private Person doIdentification() {
+        if (selectedVoiceCepstras == null || selectedTestingImage == null) return null;
+        return dataHolder.identify(selectedTestingImage.getPath(), selectedVoiceCepstras);
     }
     private void trainDataHolder(DataHolder dh) {
         dh.setIMGDimensions(92, 112);
@@ -301,33 +413,43 @@ public class MainFrame extends JFrame{
             return pathToImage;
         }
 
-        public PreviewPanel(File f) {
-            try {
-                if (f.getPath().endsWith("pgm")) {
-                    PGMReaderAlt readerAlt = new PGMReaderAlt(f);
-                    image = readerAlt.read();
-                    this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-                    this.setBorder(new EmptyBorder(1, 2, 1, 2));
-                    pathToImage = f;
-                } else if (f.getPath().endsWith("png")) {
-                    ImageProcessor processor = new ImageProcessor();
-                    BufferedImage tmp = processor.robustReadPNG(f.getPath(), DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
-                    image = processor.convertToGrayScale(tmp);
-                    this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
-                    pathToImage = f;
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        public PreviewPanel(File f) throws IOException {
+            if (f.getPath().endsWith("pgm")) {
+                PGMReaderAlt readerAlt = new PGMReaderAlt(f);
+                image = readerAlt.read();
+                this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                this.setBorder(new EmptyBorder(1, 2, 1, 2));
+                pathToImage = f;
+            } else if (f.getPath().endsWith("png")) {
+                ImageProcessor processor = new ImageProcessor();
+                BufferedImage tmp = processor.robustReadPNG(f.getPath(), DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
+                image = processor.convertToGrayScale(tmp);
+                this.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
+                pathToImage = f;
             }
+
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    try {
-                        newPersonImagesPanel.remove(PreviewPanel.this);
-                        newPersonImagesPanel.revalidate();
-                        newPersonImagesPanel.repaint();
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
+                    if (tabbedPane1.isEnabledAt(0)) {
+
+                        try {
+                            selectedDataPanel.remove(selectedFaceForIdentification);
+                            selectedFaceForIdentification = null;
+                            selectedTestingImage = null;
+                            selectedDataPanel.revalidate();
+                            selectedDataPanel.repaint();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else if (tabbedPane1.isEnabledAt(1)) {
+                        try {
+                            newPersonImagesPanel.remove(PreviewPanel.this);
+                            newPersonImagesPanel.revalidate();
+                            newPersonImagesPanel.repaint();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
 
@@ -371,6 +493,39 @@ public class MainFrame extends JFrame{
             this.width = width;
             this.height = height;
             this.setPreferredSize(new Dimension(width, height));
+            addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (tabbedPane1.isEnabledAt(0)) {
+                        selectedDataPanel.remove(selectedVoiceForIdentification);
+                        selectedVoiceForIdentification = null;
+                        selectedVoiceCepstras = null;
+                        selectedTestingVoice = null;
+                        selectedDataPanel.revalidate();
+                        selectedDataPanel.repaint();
+                    }
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         }
         @Override
         protected void paintComponent(Graphics g) {

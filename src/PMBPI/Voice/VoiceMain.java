@@ -262,6 +262,10 @@ public class VoiceMain {
         return calcCentroid(res);
     }
 
+    public static double[] train(String path, int samplesPerFrame, int samplingRate) {
+        return calcCentroid(generateMFCCS(path, samplesPerFrame, samplingRate));
+    }
+
     static double[] removeUnneccessaryMFCCS(double[] vec) {
         double[] res = new double[vec.length - 3];
         for (int i = 1; i < vec.length - 2; i++) {

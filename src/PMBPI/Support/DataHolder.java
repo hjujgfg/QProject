@@ -116,6 +116,13 @@ public class DataHolder implements Serializable{
         return people;
     }
 
+    public Person enterpretResults(double[] results) {
+        int facepn = personFacesNumbers.get((int)results[1]);
+        int voicepn = personVoicesNumbers.get((int)results[3]);
+        if (facepn == voicepn && results[2] <= 5) return people.get(voicepn);
+        if (results[2] <= 1.5) return people.get(voicepn);
+        return null;
+    }
     public int addPerson(String name, File face, File voice) {
         if (face == null || voice == null) {
             return NULL_FILE_ERROR;
@@ -270,6 +277,41 @@ public class DataHolder implements Serializable{
         }
         return identResult;
     }
+
+    public Person identify(String face, double[] testCentroid) {
+        TrainingDataHolder saved = TrainingDataHolder.load();
+        ImageProcessor processor = new ImageProcessor();
+        int[] testing  = processor.readFaceFromFile(face, IMG_WIDTH, IMG_HEIGHT);
+        double[] faceRes = Eigenface.recognizeSingle(testing, saved);
+        double[][] voicem = collectVoicesMatrix();
+        double[] voiceRecRes = VoiceMain.identify(testCentroid, voicem);
+        double[] identResult = new double[faceRes.length + voiceRecRes.length];
+        for (int i = 0; i < faceRes.length; i ++) {
+            identResult[i] = faceRes[i];
+        }
+        for (int i = 0; i < voiceRecRes.length; i ++) {
+            identResult[i+faceRes.length] = voiceRecRes[i];
+        }
+        return enterpretResults(identResult);
+    }
+
+    public Person identify(String face, String[] voices) {
+        try {
+            return enterpretResults(recognize(face, voices));
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    public Person identify(String face, String voice) {
+        String[] voices = {voice};
+        try {
+            return enterpretResults(recognize(face, voices));
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
     public Person identifyByImage(BufferedImage image) {
         ImageProcessor processor = new ImageProcessor();
         int[] face = processor.extractInnerImage(image, IMG_WIDTH, IMG_HEIGHT);

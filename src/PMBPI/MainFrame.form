@@ -84,7 +84,7 @@
           <tabbedpane id="f30c1" binding="tabbedPane1" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <minimum-size width="-1" height="200"/>
+                <minimum-size width="-1" height="300"/>
                 <preferred-size width="200" height="-1"/>
               </grid>
             </constraints>
@@ -102,13 +102,15 @@
                   <grid id="7f44b" binding="IdentifiedFacePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="120"/>
+                      </grid>
                     </constraints>
                     <properties/>
                     <border type="none" title="Результат идентификации"/>
                     <children/>
                   </grid>
-                  <grid id="1f607" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="1f607" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -134,12 +136,22 @@
                           <text value="Выбрать запись голоса"/>
                         </properties>
                       </component>
+                      <component id="4856" class="javax.swing.JButton" binding="startCustomIdentificationBtn">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Идентифицировать"/>
+                        </properties>
+                      </component>
                     </children>
                   </grid>
                   <grid id="5e187" binding="selectedDataPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="120"/>
+                      </grid>
                     </constraints>
                     <properties/>
                     <border type="none" title="Выбранные данные"/>
@@ -209,7 +221,7 @@
                           </grid>
                         </constraints>
                         <properties>
-                          <toolTipText value="Кликните на изображение для его удаления"/>
+                          <toolTipText value="Кликните на изображении для его удаления"/>
                         </properties>
                         <border type="none" title="Изображения"/>
                         <children>
@@ -253,7 +265,7 @@
                           <text value="Захватить с камеры"/>
                         </properties>
                       </component>
-                      <component id="853eb" class="javax.swing.JButton" binding="выбратьЗвуковойФайлButton" default-binding="true">
+                      <component id="853eb" class="javax.swing.JButton" binding="chooseVoiceFileButton">
                         <constraints>
                           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -266,7 +278,9 @@
                   <grid id="770f7" binding="newPersonVoicesPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="0" left="0" bottom="0" right="0"/>
                     <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                        <minimum-size width="-1" height="120"/>
+                      </grid>
                     </constraints>
                     <properties/>
                     <border type="none" title="Записи голоса"/>
