@@ -1,10 +1,4 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
+
 package PMBPI.Voice;
 
 import java.awt.BasicStroke;
@@ -47,16 +41,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.SoftBevelBorder;
 
-/**
- * Capture/Playback sample. Record audio in different formats and then playback
- * the recorded audio. The captured audio can be saved either as a WAVE, AU or
- * AIFF. Or load an audio file for streaming playback.
- * 
- * @version @(#)Manual.java 1.11 99/12/03
- * @version 2.1
- * @author Brian Lichtenwalter-- visualization and capture
- * @modified-by Ganesh --> made a reusable class
- */
+
 
 public class JSoundCapture extends JPanel implements ActionListener {
 

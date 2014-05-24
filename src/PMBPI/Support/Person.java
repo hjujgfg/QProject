@@ -66,6 +66,15 @@ public class Person implements Serializable{
         }
     }
 
+    public int addVoice(double[] voice) {
+        try {
+            trainingVoices.add(voice);
+            return DataHolder.SUCCESS;
+        } catch (NullPointerException ex) {
+            return DataHolder.NULL_FILE_ERROR;
+        }
+    }
+
     public int addMultVoicesForOneSample(String[] voices) {
         try {
             double [] d = VoiceMain.trainOnSeveralFiles(voices, DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);

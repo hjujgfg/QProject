@@ -12,12 +12,7 @@ import PMBPI.Voice.feature.Energy;
 import PMBPI.Voice.feature.FeatureVector;
 import PMBPI.Voice.feature.MFCC;
 
-/**
- * Feature extraction, cepstral mean substraction, and merging with deltas
- * 
- * @author Ganesh Tiwari
- * 
- */
+
 public class FeatureExtract {
 	private float[][] framedSignal;
 	private int samplePerFrame;

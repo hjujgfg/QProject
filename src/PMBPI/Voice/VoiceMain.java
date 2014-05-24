@@ -274,7 +274,7 @@ public class VoiceMain {
         return res;
     }
 
-    static double[] calcCentroid(double[][] cluster) {
+    public static double[] calcCentroid(double[][] cluster) {
         double[] mean = new double[cluster[0].length];
 
         for (int i = 0; i < cluster[0].length; i++) {

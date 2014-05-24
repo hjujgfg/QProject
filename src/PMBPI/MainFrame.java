@@ -10,6 +10,7 @@ import PMBPI.Voice.Microphone;
 import PMBPI.Voice.VoiceMain;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import com.sun.javafx.collections.annotations.ReturnsUnmodifiableCollection;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.log4j.BasicConfigurator;
@@ -23,6 +24,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 /**
@@ -39,7 +41,7 @@ public class MainFrame extends JFrame{
     private JLabel voiceCaptureLabel;
     private JPanel testSignalPanel;
     private JPanel voiceStatusLabel;
-    private JTextField textField1;
+    private JTextField personNameField;
     private JButton addPersonButton;
     private JButton chooseImageFile;
     private JButton captureImageButton;
@@ -49,6 +51,7 @@ public class MainFrame extends JFrame{
     private JPanel newPersonVoicesPanel;
     private JPanel selectedDataPanel;
     private JButton startCustomIdentificationBtn;
+    private JButton recordingBtn;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -65,9 +68,10 @@ public class MainFrame extends JFrame{
     double [] selectedVoiceCepstras;
     PreviewPanel selectedFaceForIdentification;
     CepstraPreviewPanel selectedVoiceForIdentification;
-
-
+    ArrayList<double[]> newPersonCepstras;
+    int newPersonVoiceIndex;
     int newPersonImageIndex;
+    boolean recording;
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
@@ -88,38 +92,122 @@ public class MainFrame extends JFrame{
             }
         });
         newPersonImageIndex = 0;
+        newPersonVoiceIndex = 0;
+        newPersonVoicesPanel.setLayout(new GridBagLayout());
+        recording = false;
+        recordingBtn.setEnabled(false);
         voiceCaptureLabel.requestFocus();
-        voiceCaptureLabel.addKeyListener( new KeyListener() {
-            boolean recording = false;
-            int i = 0;
+        voiceCaptureLabel.addKeyListener(new KeyListener() {
+
             Microphone microphone;
+
             @Override
             public void keyTyped(KeyEvent e) {
                 if (!recording) {
-                    if (e.getKeyChar() == 'k') {
-                        microphone = new Microphone("data/"+i+".wav");
+                    if (e.getKeyChar() == ' ') {
                         voiceCaptureLabel.setText("Идет запись");
-                        soundCaptureThread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                microphone.start();
-                            }
-                        });
-                        soundCaptureThread.start();
                         recording = true;
+                        if (tabbedPane1.getSelectedIndex() == 0){
+                            microphone = new Microphone("data/tempSample.wav");
+
+                            soundCaptureThread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    microphone.start();
+                                    //while (recording) {}
+                                    //microphone.stop();
+                                }
+                            });
+                            //microphone.start();
+                            soundCaptureThread.start();
+
+                        } else if (tabbedPane1.getSelectedIndex() == 1) {
+                            microphone = new Microphone("data/tmp" + newPersonVoiceIndex + ".wav");
+                            soundCaptureThread = new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    microphone.start();
+                                }
+                            });
+                            soundCaptureThread.start();
+                            microphone.stop();
+                        }
                     }
-                }  else {
-                    if (e.getKeyChar() == 'k') {
-                        microphone.stop();
-                        i++;
-                        soundCaptureThread.interrupt();
-                        double[] d = VoiceMain.getCentroidOfRecording("data/"+(i-1)+".wav", 16, 16000);
-                        CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
-                        testSignalPanel.removeAll();
-                        testSignalPanel.add(pnl);
-                        testSignalPanel.revalidate();
-                        testSignalPanel.repaint();
+                } else {
+                    if (e.getKeyChar() == ' ') {
+                        voiceCaptureLabel.setText("Нажмите пробел для начала записи");
                         recording = false;
+
+                        microphone.stop();
+                        soundCaptureThread.interrupt();
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e1) {
+                            e1.printStackTrace();
+                        }
+
+                        if (tabbedPane1.getSelectedIndex() == 0) {
+                            //while (soundCaptureThread.isAlive()) {}
+                            double[] d;
+                            try {
+                                d = VoiceMain.getCentroidOfRecording("data/tempSample.wav", 16, 16000);
+                                if (d == null) {
+                                    JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                                    return;
+                                }
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                                return;
+                            }
+                            CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
+                            testSignalPanel.removeAll();
+                            testSignalPanel.add(pnl);
+                            testSignalPanel.revalidate();
+                            testSignalPanel.repaint();
+                            realTimeIdentificationThreadIsRunning = false;
+                            BufferedImage image = webcam.getImage();
+                            ImageProcessor processor = new ImageProcessor();
+                            image = processor.rescaleImageBrightness(image, 1.35f, 15);
+                            BufferedImage gray = processor.convertToGrayScale(image);
+                            int [] face = processor.extractInnerImage(gray, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
+                            try {
+                                Eigenface.writeToPGM(face, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT, "data/identImageTmp.pgm");
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата изображения");
+                                return;
+                            }
+                            Person p = dataHolder.identify("data/identImageTmp.pgm", d);
+                            if (p == null) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Человека с такими параметрами нет в выборке");
+                                return;
+                            }
+                            IdentifiedFacePanel.removeAll();
+                            try {
+                                IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
+                                IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            }
+
+                        } else if (tabbedPane1.getSelectedIndex() == 1) {
+                            double[] d = null;
+                            try {
+                                d = VoiceMain.getCentroidOfRecording("data/tmp" + newPersonVoiceIndex + ".wav", DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                                if (d == null) {
+                                    JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                                }
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                            }
+                            newPersonCepstras.add(d);
+                            CepstraPreviewPanel p = new CepstraPreviewPanel(d, 200, 100);
+                            p.indexForNewPerson = newPersonVoiceIndex;
+                            newPersonVoicesPanel.add(p);
+                            newPersonVoiceIndex ++;
+                            newPersonVoicesPanel.revalidate();
+                            newPersonVoicesPanel.repaint();
+                        }
+                        System.gc();
                     }
                 }
             }
@@ -134,7 +222,7 @@ public class MainFrame extends JFrame{
 
             }
         });
-
+        newPersonCepstras = new ArrayList<double[]>();
         dataHolder = DataHolder.restore();
         if (dataHolder == null) {
             dataHolder = new DataHolder();
@@ -212,6 +300,7 @@ public class MainFrame extends JFrame{
                             newPersonImagesPanel.add(new PreviewPanel(f));
                             newPersonImagesPanel.revalidate();
                             newPersonImagesPanel.repaint();
+                            newPersonImageIndex ++;
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
                         }
@@ -235,14 +324,20 @@ public class MainFrame extends JFrame{
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File[] files = chooser.getSelectedFiles();
-                    String[] fis = new String[files.length];
-                    int i = 0;
-                    for (File f : files) {
-                        fis[i] = f.getPath();
-                        i ++;
+
+                    for (File f : files ) {
+                        double[] temp;
+                        try {
+                            temp = VoiceMain.getCentroidOfRecording(f.getPath(), DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                            newPersonCepstras.add(temp);
+                            CepstraPreviewPanel p = new CepstraPreviewPanel(temp, 200, 100);
+                            p.indexForNewPerson = newPersonVoiceIndex;
+                            newPersonVoicesPanel.add(p);
+                            newPersonVoiceIndex ++;
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Ошибка чтения файла: " + f.getPath());
+                        }
                     }
-                    i = 0;
-                    //TODO!!
                 }
             }
         });
@@ -257,6 +352,7 @@ public class MainFrame extends JFrame{
                     int [] res = processor.extractInnerImage(image, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
                     Eigenface.writeToPGM(res, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT, "data/temp" + newPersonImageIndex+".pgm");
                     newPersonImagesPanel.add(new PreviewPanel(new File("data/temp" + newPersonImageIndex+".pgm")));
+                    newPersonImageIndex ++;
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -286,6 +382,8 @@ public class MainFrame extends JFrame{
                         selectedFaceForIdentification = new PreviewPanel(f);
                         selectedDataPanel.add(selectedFaceForIdentification);
                         selectedTestingImage = f;
+                        selectedDataPanel.revalidate();
+                        selectedDataPanel.repaint();
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
                     }
@@ -302,21 +400,31 @@ public class MainFrame extends JFrame{
                 chooser.setFileFilter(filter);
                 File currentdir = new File(System.getProperty("user.dir"));
                 chooser.setCurrentDirectory(currentdir);
+                chooser.setMultiSelectionEnabled(true);
                 int returnVal = chooser.showOpenDialog(MainFrame.this);
 
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File f = chooser.getSelectedFile();
+
                     try {
                         try {
                             selectedDataPanel.remove(selectedVoiceForIdentification);
                         } catch (Exception ex) {}
-
-                        selectedVoiceCepstras = VoiceMain.getCentroidOfRecording(f.getPath(), DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                        File[] files = chooser.getSelectedFiles();
+                        String [] strings = new String[files.length];
+                        int i = 0;
+                        for (File f : files) {
+                            strings[i] = f.getPath();
+                            i ++;
+                        }
+                        //selectedVoiceCepstras = VoiceMain.getCentroidOfRecording(f.getPath(), DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                        selectedVoiceCepstras = VoiceMain.trainOnSeveralFiles(strings, DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
                         selectedVoiceForIdentification = new CepstraPreviewPanel(selectedVoiceCepstras, 200, 100);
                         selectedDataPanel.add(selectedVoiceForIdentification);
-                        selectedTestingVoice = f;
+                        //selectedTestingVoice = f;
+                        selectedDataPanel.revalidate();
+                        selectedDataPanel.repaint();
                     }catch (Exception ex) {
-                        JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: " + f.getPath());
+                        JOptionPane.showMessageDialog(newPersonImagesPanel, "Ошибка чтения файла: ");// + f.getPath());
                     }
                 }
             }
@@ -350,6 +458,164 @@ public class MainFrame extends JFrame{
             }
         });
 
+        addPersonButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = personNameField.getText();
+                if (name.equals("")) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Введите имя");
+                    return;
+                }
+                if (newPersonCepstras == null) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Добавьте записи голоса");
+                    return;
+                }
+                if (newPersonCepstras.size() == 0) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Добавьте записи голоса");
+                    return;
+                }
+                if (newPersonImageIndex <= 1) {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Добавьте изображения");
+                    return;
+                }
+                String[] newImages = new String[newPersonImageIndex];
+                /*for (int i = 0; i < newPersonImageIndex; i ++) {
+                    PreviewPanel tmp = (PreviewPanel)newPersonImagesPanel.getComponent(i);
+                    tmp.getPathToImage().renameTo(new File("data/" + name + "" +i+".pgm"));
+                    newImages[i] = "data/" + name + "" +i+".pgm";
+                }*/
+                int j = 0;
+                for (int i = 0; i < newPersonImagesPanel.getComponentCount(); i ++) {
+                    try {
+                        PreviewPanel tmp = (PreviewPanel)newPersonImagesPanel.getComponent(i);
+                        tmp.getPathToImage().renameTo(new File("data/" + name + "" +j+".pgm"));
+                        newImages[j] = "data/" + name + "" +j+".pgm";
+                        j ++;
+                    } catch(Exception ex) {
+
+                    }
+                }
+                dataHolder.addPerson(name, newImages, newPersonCepstras);
+                newPersonImagesPanel.removeAll();
+                newPersonVoicesPanel.revalidate();
+                newPersonImagesPanel.repaint();
+                newPersonVoicesPanel.removeAll();
+                newPersonVoicesPanel.revalidate();
+                newPersonImageIndex = 0;
+                newPersonVoiceIndex = 0;
+                newPersonCepstras.clear();
+                personNameField.setText("");
+            }
+        });
+        recordingBtn.addActionListener(new ActionListener() {
+            Microphone microphone;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(MainFrame.this, "Is enabled at 0 " + tabbedPane1.getSelectedIndex());
+                if (!recording) {
+
+
+                    voiceCaptureLabel.setText("Идет запись");
+                    recording = true;
+                    if (tabbedPane1.isEnabledAt(0)){
+                        microphone = new Microphone("data/tempSample.wav");
+
+                        soundCaptureThread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                microphone.start();
+                                //while (recording) {}
+                                //microphone.stop();
+                            }
+                        });
+                        //microphone.start();
+                        soundCaptureThread.start();
+
+                    } else if (tabbedPane1.isEnabledAt(1)) {
+                        microphone = new Microphone("data/tmp" + newPersonVoiceIndex + ".wav");
+                        soundCaptureThread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                microphone.start();
+                            }
+                        });
+                        soundCaptureThread.start();
+                        microphone.stop();
+                    }
+
+                } else {
+
+                    voiceCaptureLabel.setText("Нажмите пробел для начала записи");
+                    recording = false;
+
+                    microphone.stop();
+                    soundCaptureThread.interrupt();
+
+
+
+                    if (tabbedPane1.isEnabledAt(0)) {
+                        //while (soundCaptureThread.isAlive()) {}
+                        double[] d;
+                        try {
+                            d = VoiceMain.getCentroidOfRecording("data/tempSample.wav", 16, 16000);
+                            if (d == null) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                                return;
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                            return;
+                        }
+                        CepstraPreviewPanel pnl = new CepstraPreviewPanel(d, 200, 100);
+                        testSignalPanel.removeAll();
+                        testSignalPanel.add(pnl);
+                        testSignalPanel.revalidate();
+                        testSignalPanel.repaint();
+                        realTimeIdentificationThreadIsRunning = false;
+                        BufferedImage image = webcam.getImage();
+                        ImageProcessor processor = new ImageProcessor();
+                        image = processor.rescaleImageBrightness(image, 1.35f, 15);
+                        BufferedImage gray = processor.convertToGrayScale(image);
+                        int [] face = processor.extractInnerImage(gray, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
+                        try {
+                            Eigenface.writeToPGM(face, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT, "data/identImageTmp.pgm");
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата изображения");
+                            return;
+                        }
+                        Person p = dataHolder.identify("data/identImageTmp.pgm", d);
+                        if (p == null) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Человека с такими параметрами нет в выборке");
+                            return;
+                        }
+                        IdentifiedFacePanel.removeAll();
+                        try {
+                            IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
+                            IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+
+                    } else if (tabbedPane1.isEnabledAt(1)) {
+                        double[] d = null;
+                        try {
+                            d = VoiceMain.getCentroidOfRecording("data/tmp" + newPersonVoiceIndex + ".wav", DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
+                            if (d == null) {
+                                JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Ошибка захвата звука, попробуйте повторно");
+                        }
+                        newPersonCepstras.add(d);
+                        newPersonVoiceIndex ++;
+                        newPersonVoicesPanel.add(new CepstraPreviewPanel(d, 200, 100));
+                        newPersonVoicesPanel.revalidate();
+                        newPersonVoicesPanel.repaint();
+                    }
+                    System.gc();
+                }
+            }
+        });
     }
 
     private Person doIdentification() {
@@ -359,7 +625,7 @@ public class MainFrame extends JFrame{
     private void trainDataHolder(DataHolder dh) {
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 3;
+        int train = 5;
         int test = 5;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
@@ -431,7 +697,7 @@ public class MainFrame extends JFrame{
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (tabbedPane1.isEnabledAt(0)) {
+                    if (tabbedPane1.getSelectedIndex() == 0) {
 
                         try {
                             selectedDataPanel.remove(selectedFaceForIdentification);
@@ -442,7 +708,7 @@ public class MainFrame extends JFrame{
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
-                    } else if (tabbedPane1.isEnabledAt(1)) {
+                    } else if (tabbedPane1.getSelectedIndex() == 1) {
                         try {
                             newPersonImagesPanel.remove(PreviewPanel.this);
                             newPersonImagesPanel.revalidate();
@@ -486,9 +752,12 @@ public class MainFrame extends JFrame{
 
     private class CepstraPreviewPanel extends JPanel{
         private double[] coefs;
+        double[] connectedCepstras;
         int width;
         int height;
+        public int indexForNewPerson;
         public CepstraPreviewPanel(double [] coefficients, int width, int height) {
+            connectedCepstras = coefficients;
             coefs = coefficients.clone();
             this.width = width;
             this.height = height;
@@ -496,13 +765,23 @@ public class MainFrame extends JFrame{
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (tabbedPane1.isEnabledAt(0)) {
+                    if (tabbedPane1.getSelectedIndex() == 0) {
                         selectedDataPanel.remove(selectedVoiceForIdentification);
                         selectedVoiceForIdentification = null;
                         selectedVoiceCepstras = null;
                         selectedTestingVoice = null;
                         selectedDataPanel.revalidate();
                         selectedDataPanel.repaint();
+                    } else if (tabbedPane1.getSelectedIndex() == 1) {
+                        try {
+                            newPersonVoicesPanel.remove(CepstraPreviewPanel.this);
+                            newPersonCepstras.remove(connectedCepstras);
+                            newPersonVoiceIndex --;
+                            newPersonVoicesPanel.revalidate();
+                            newPersonVoicesPanel.repaint();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(MainFrame.this, "Ошибка удаления записи");
+                        }
                     }
                 }
 

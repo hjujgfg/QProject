@@ -35,8 +35,8 @@ public class DataHolder implements Serializable{
         DataHolder dh = new DataHolder();
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 3;
-        int test = 5;
+        int train = 20;
+        int test = 24;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 2; j ++) {
@@ -119,7 +119,7 @@ public class DataHolder implements Serializable{
     public Person enterpretResults(double[] results) {
         int facepn = personFacesNumbers.get((int)results[1]);
         int voicepn = personVoicesNumbers.get((int)results[3]);
-        if (facepn == voicepn && results[2] <= 5) return people.get(voicepn);
+        if (facepn == voicepn && results[2] <= 5 && results[0] <= 60000000) return people.get(voicepn);
         if (results[2] <= 1.5) return people.get(voicepn);
         return null;
     }
@@ -133,6 +133,28 @@ public class DataHolder implements Serializable{
         TrainingDataHolder tmp = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
         return tmp.save();
     }
+    public int addPerson(String name, String[] faces, ArrayList<double[]> voices) {
+        Person p = new Person(name);
+        for (String s : faces) {
+            p.addFace(s);
+        }
+        int [][] matr = collectFaceMatrix();
+        TrainingDataHolder tdh = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
+        tdh.save();
+        double[][] doubles = new double[voices.size()][];
+        int i = 0;
+        for (double[] d : voices) {
+            doubles[i] = d;
+            i ++;
+        }
+        double[] centroid = VoiceMain.calcCentroid(doubles);
+        p.addVoice(centroid);
+        p.setUserPic(new File(faces[0]));
+        people.add(p);
+        return DataHolder.SUCCESS;
+    }
+
+
 
     public int addPerson(String name, String[] faces, String[] voices) {
         Person p = new Person(name);

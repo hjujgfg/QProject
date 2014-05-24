@@ -13,6 +13,7 @@ public class Microphone {
     private AudioFormat format;
     private AudioFileFormat.Type fileType;
     private File wavFile;
+    public boolean isRunning;
     public Microphone(String file) {
         initialize(file);
     }
@@ -36,6 +37,7 @@ public class Microphone {
             AudioInputStream ais = new AudioInputStream(dataLine);
             System.out.print("start recording");
             AudioSystem.write(ais, fileType, wavFile);
+
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -43,6 +45,7 @@ public class Microphone {
         }
     }
     public void stop() {
+        dataLine.flush();
         dataLine.stop();
         dataLine.close();
         System.out.print("finished");

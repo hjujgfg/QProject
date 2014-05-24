@@ -1,10 +1,4 @@
-/*
-  Please feel free to use/modify this class. 
-  If you give me credit by keeping this information or
-  by sending me an email before using it or by reporting bugs , i will be happy.
-  Email : gtiwari333@gmail.com,
-  Blog : http://ganeshtiwaridotcomdotnp.blogspot.com/ 
- */
+
 package PMBPI.Voice;
 
 import java.io.ByteArrayInputStream;
@@ -19,11 +13,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- * saving and extracting PCM data from wavefile byteArray
- * 
- * @author Ganesh Tiwari
- */
+
 public class WaveData {
 
 	private byte[] arrFile;
