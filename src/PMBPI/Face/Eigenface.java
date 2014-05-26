@@ -40,7 +40,21 @@ public class Eigenface {
     public static double[][] localMain(int[][] matr, int [][] I, int width, int height) {
         //int[] f = {1, 2};
         //int[][] matr = readFaces(nums, f);
-        int[] mean = calcMean(matr);
+        int[][] pre = new int[matr.length/5][];
+        int k = 0;
+        for (int i = 0; i < matr.length; i += 5) {
+            int[][] tmp = new int[5][];
+            tmp[0] = matr[i];
+            tmp[1] = matr[i+1];
+            tmp[2] = matr[i+2];
+            tmp[3] = matr[i+3];
+            tmp[4] = matr[i+4];
+            pre[k] = calcMean(tmp);
+            k ++;
+        }
+        int[] mean = calcMean(pre);
+        matr = pre;
+        //int[] mean = calcMean(matr);
         subtractMean(matr, mean);
         /*try {
             writeToPGM(mean, width, height, "faces/mean.pgm");
@@ -96,15 +110,22 @@ public class Eigenface {
             o ++;
         }
         System.out.print("\n Our Result \n");
+        int errorrate = 0;
         for (int i = 0; i < res.length; i++) {
             if (i % 3 == 0)
                 System.out.print("\n");
             for (int j = 0; j < res[i].length; j++) {
-                System.out.print(res[i][j] + " ");
-            }
+                //System.out.print(((int)res[i][j] - 1) / 3  + " ");
+                System.out.print((int)res[i][j] + " ");
 
+            }
+            if ((i)/3 != (int) res[i][1]) {
+                System.out.print(" X");
+                errorrate ++;
+            }
             System.out.print("\n");
         }
+        System.out.println("N of errors = " + errorrate + " pre cent: " + errorrate * 100 / 120);
         return res;
     }
 
@@ -182,11 +203,11 @@ public class Eigenface {
                 double[] first = covarianceMatr.preMultiply(subVect);
                 d[j] = Math.sqrt(Math.sqrt(multVectors(first, subVect)));*/
         }
-        System.out.println("Eigenface distances");
+        /*System.out.println("Eigenface distances");
         for (double dd : d) {
             System.out.print(dd + " ");
         }
-        System.out.println();
+        System.out.println();*/
         RealVector r = new ArrayRealVector(d);
 
         res[0] = r.getMinValue();
@@ -383,9 +404,10 @@ public class Eigenface {
             for (int i = 0; i < x * y; i++)
                 image[i] = dis.readUnsignedByte();
 
-            for (int i : image) {
+            /*for (int i : image) {
                 System.out.print(i + " ");
-            }
+            }*/
+
 
             br.close();
             is.close();
