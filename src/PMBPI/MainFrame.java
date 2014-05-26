@@ -72,6 +72,7 @@ public class MainFrame extends JFrame{
     int newPersonVoiceIndex;
     int newPersonImageIndex;
     boolean recording;
+    Microphone microphone;
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
@@ -99,7 +100,7 @@ public class MainFrame extends JFrame{
         voiceCaptureLabel.requestFocus();
         voiceCaptureLabel.addKeyListener(new KeyListener() {
 
-            Microphone microphone;
+
 
             @Override
             public void keyTyped(KeyEvent e) {
@@ -139,12 +140,14 @@ public class MainFrame extends JFrame{
                         recording = false;
 
                         microphone.stop();
-                        soundCaptureThread.interrupt();
-                        try {
-                            Thread.sleep(1000);
+
+                        //soundCaptureThread.interrupt();
+                        /*try {
+                            Thread.sleep(500);
+                            soundCaptureThread.isAlive();
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
-                        }
+                        }*/
 
                         if (tabbedPane1.getSelectedIndex() == 0) {
                             //while (soundCaptureThread.isAlive()) {}
@@ -232,6 +235,7 @@ public class MainFrame extends JFrame{
         dataHolder.setSoundCapureParams(16, 16000);
         //mic = new Microphone("data/~tmp.wav");
         webcam = Webcam.getDefault();
+
         webcam.setViewSize(new Dimension(176, 144));
         CameraPlace.setLayout(new GridBagLayout());
         final WebcamPanel webcamPanel = new WebcamPanel(webcam, new Dimension(176, 144), true);
@@ -625,8 +629,7 @@ public class MainFrame extends JFrame{
     private void trainDataHolder(DataHolder dh) {
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 5;
-        int test = 5;
+        int train = 20;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 2; j ++) {

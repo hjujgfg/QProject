@@ -276,7 +276,7 @@ public class Eigenface {
     }
 
 
-    static int[] calcMean(int[][] arr) {
+    public static int[] calcMean(int[][] arr) {
         int[] avg = new int[arr[0].length];
         for (int i = 0; i < arr[0].length; i++) {
             avg[i] = 0;

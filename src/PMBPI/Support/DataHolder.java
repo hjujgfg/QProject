@@ -120,7 +120,7 @@ public class DataHolder implements Serializable{
         int facepn = personFacesNumbers.get((int)results[1]);
         int voicepn = personVoicesNumbers.get((int)results[3]);
         if (facepn == voicepn && results[2] <= 5 && results[0] <= 60000000) return people.get(voicepn);
-        if (results[2] <= 1.5) return people.get(voicepn);
+        if (results[2] <= 5 && facepn == voicepn) return people.get(voicepn);
         return null;
     }
     public int addPerson(String name, File face, File voice) {
@@ -236,7 +236,7 @@ public class DataHolder implements Serializable{
         return SUCCESS;
     }
 
-    public int[][] collectFaceMatrix() {
+    /*public int[][] collectFaceMatrix() {
         int[][] matrix;
         ArrayList<int[]> preMatrix = new ArrayList<int[]>();
         personFacesNumbers.clear();
@@ -246,6 +246,24 @@ public class DataHolder implements Serializable{
                 preMatrix.add(t);
                 personFacesNumbers.add(personCounter);
             }
+            personCounter++;
+        }
+        matrix = new int[preMatrix.size()][];
+        int i = 0;
+        for (int[] m : preMatrix) {
+            matrix[i] = m;
+            i++;
+        }
+        return matrix;
+    }*/
+    public int[][] collectFaceMatrix() {
+        int[][] matrix;
+        ArrayList<int[]> preMatrix = new ArrayList<int[]>();
+        personFacesNumbers.clear();
+        int personCounter = 0;
+        for (Person p : people) {
+            preMatrix.add(Eigenface.calcMean(p.getFaceMatrix()));
+            personFacesNumbers.add(personCounter);
             personCounter++;
         }
         matrix = new int[preMatrix.size()][];
