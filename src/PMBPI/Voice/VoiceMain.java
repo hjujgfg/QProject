@@ -74,8 +74,8 @@ public class VoiceMain {
             System.out.println();
         }
         System.out.println("Num errors = " + errorNumber);*/
-        int trainingN = 24;
-        int testingN = 24;
+        int trainingN = 40;
+        int testingN = 40;
         String [][] trainingFiles = new String[trainingN][7];
         for (int i = 0; i < trainingN; i ++) {
             for (int j = 0; j < 7; j ++) {

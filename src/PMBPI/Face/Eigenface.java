@@ -203,11 +203,11 @@ public class Eigenface {
                 double[] first = covarianceMatr.preMultiply(subVect);
                 d[j] = Math.sqrt(Math.sqrt(multVectors(first, subVect)));*/
         }
-        /*System.out.println("Eigenface distances");
+        System.out.println("Eigenface distances");
         for (double dd : d) {
             System.out.print(dd + " ");
         }
-        System.out.println();*/
+        System.out.println();
         RealVector r = new ArrayRealVector(d);
 
         res[0] = r.getMinValue();

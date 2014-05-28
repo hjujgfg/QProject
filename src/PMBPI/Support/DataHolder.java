@@ -35,8 +35,8 @@ public class DataHolder implements Serializable{
         DataHolder dh = new DataHolder();
         dh.setIMGDimensions(92, 112);
         dh.setSoundCapureParams(16, 16000);
-        int train = 20;
-        int test = 24;
+        int train = 40;
+        int test = 40;
         String[][] perFaces = new String[train][2];
         for (int i = 0; i < train; i ++) {
             for (int j = 0; j < 2; j ++) {
@@ -51,6 +51,7 @@ public class DataHolder implements Serializable{
         }
         for (int i = 0; i < train; i ++) {
             dh.addPerson("pers#" + (i+1), perFaces[i], perVoices[i]);
+            System.out.println("adding person " + i);
         }
 
         String[][] perFacest = new String[test][3];
@@ -76,17 +77,28 @@ public class DataHolder implements Serializable{
             results[i + 1] = dh.recognize(perFacest[j][1], perVoicest[j]);
             results[i + 2] = dh.recognize(perFacest[j][2], perVoicest[j]);
             j ++;
+            System.out.println("recognizing pers " + j);
         }
         int i = 0;
+        int personcounter = 0;
+        int errorsNumber = 0;
         for (double[] d : results) {
             System.out.println();
             System.out.println("test# " + i);
-            int facepn = dh.personFacesNumbers.get((int)d[1]);
+            /*int facepn = dh.personFacesNumbers.get((int)d[1]);
             int voicepn = dh.personVoicesNumbers.get((int)d[3]);
             System.out.print("P-face: " + dh.people.get(facepn).getName() + " " +d[0] + "\n");
             System.out.print("P-voice: " + dh.people.get(voicepn).getName() + " " + d[2] + "\n");
-            System.out.println("---------------------------");
+            System.out.println("---------------------------");*/
+            int res = dh.enterpretResultsTest(d);
+            System.out.print("result person: " + res + " personCounter: " + personcounter);
+            if (personcounter != res) errorsNumber ++;
             i ++;
+            if (i % 3 == 0) {
+                personcounter ++;
+                System.out.println("\n---------------------------------");
+            }
+
             /*for (double dd : d) {
                 System.out.print(dd + " ");
             }
@@ -101,6 +113,7 @@ public class DataHolder implements Serializable{
             System.out.print(o + " ");
         }*/
         System.out.println();
+        System.out.println("Number of errors: " + errorsNumber);
     }
 
 
@@ -116,12 +129,34 @@ public class DataHolder implements Serializable{
         return people;
     }
 
-    public Person enterpretResults(double[] results) {
+    /*public Person enterpretResults(double[] results) {
         int facepn = personFacesNumbers.get((int)results[1]);
         int voicepn = personVoicesNumbers.get((int)results[3]);
         if (facepn == voicepn && results[2] <= 5 && results[0] <= 60000000) return people.get(voicepn);
         if (results[2] <= 5 && facepn == voicepn) return people.get(voicepn);
         return null;
+    }*/
+    public Person enterpretResults (double[] results) {
+        int facepn = personFacesNumbers.get((int)results[1]);
+        int voicepn = personVoicesNumbers.get((int)results[3]);
+        if (facepn == voicepn && results[2] <= 5 && results[0] <= 10000000) return people.get(voicepn);
+        if (results[2] <= 5 && facepn == voicepn) return people.get(voicepn);
+        if (results[0] > 10000000 && results[2] < 5) return people.get(voicepn);
+        if (results[2] > 7 && results[0] < 10000000) return people.get(facepn);
+        if (facepn == voicepn) return people.get(voicepn);
+        if (results[2] < 1.2) return people.get(voicepn);
+        return null;
+    }
+    public int enterpretResultsTest(double[] results) {
+        int facepn = personFacesNumbers.get((int)results[1]);
+        int voicepn = personVoicesNumbers.get((int)results[3]);
+        if (facepn == voicepn && results[2] <= 7 && results[0] <= 10000000) return voicepn;
+        if (results[2] <= 7 && facepn == voicepn) return voicepn;
+        if (results[0] > 10000000) return voicepn;
+        if (results[2] > 7 && results[0] < 10000000) return facepn;
+        if (facepn == voicepn) return voicepn;
+        if (results[2] < 1.2) return voicepn;
+        return -1;
     }
     public int addPerson(String name, File face, File voice) {
         if (face == null || voice == null) {

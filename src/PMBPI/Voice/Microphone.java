@@ -1,8 +1,7 @@
 package PMBPI.Voice;
 
 import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by egor on 1/7/14.
@@ -22,9 +21,15 @@ public class Microphone {
         fileType = AudioFileFormat.Type.WAVE;
         info = new DataLine.Info(TargetDataLine.class, format);
         wavFile = new File(file);
+        try {
+            dataLine = (TargetDataLine) AudioSystem.getLine(info);
+            dataLine.open(format);
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void start() {
+    /*public void start() {
         try {
             if (!AudioSystem.isLineSupported(info)) {
                 System.out.print("Line not supported");
@@ -40,6 +45,25 @@ public class Microphone {
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+    public void start() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        int numBytesRead;
+        byte[] data = new byte[dataLine.getBufferSize() / 5];
+        dataLine.start();
+        isRunning = true;
+        while (isRunning) {
+            numBytesRead = dataLine.read(data, 0, data.length);
+            out.write(data, 0, numBytesRead);
+        }
+        byte[] audioData = out.toByteArray();
+        ByteArrayInputStream bais = new ByteArrayInputStream(audioData);
+        AudioInputStream outputAIS = new AudioInputStream(bais, format, audioData.length/format.getFrameSize());
+        try {
+            AudioSystem.write(outputAIS, AudioFileFormat.Type.WAVE, wavFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

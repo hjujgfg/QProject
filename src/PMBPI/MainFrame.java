@@ -16,6 +16,7 @@ import org.apache.commons.math3.linear.RealVector;
 import org.apache.log4j.BasicConfigurator;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -52,6 +53,7 @@ public class MainFrame extends JFrame{
     private JPanel selectedDataPanel;
     private JButton startCustomIdentificationBtn;
     private JButton recordingBtn;
+    private JLabel identifiedPersonNameLabel;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
     static final int PREFERRED_SIZE_W = 92;
@@ -268,6 +270,8 @@ public class MainFrame extends JFrame{
                         IdentifiedFacePanel.removeAll();
                         IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
                         IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                        Border b = BorderFactory.createTitledBorder("Результат идентификации: " + p.getName());
+                        IdentifiedFacePanel.setBorder(b);
                         IdentifiedFacePanel.revalidate();
                         IdentifiedFacePanel.repaint();
                     }
@@ -459,6 +463,8 @@ public class MainFrame extends JFrame{
                         e1.printStackTrace();
                     }
                     IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                    Border b = BorderFactory.createTitledBorder("Результат идентификации: " + p.getName());
+                    IdentifiedFacePanel.setBorder(b);
                     IdentifiedFacePanel.revalidate();
                     IdentifiedFacePanel.repaint();
                 }
@@ -569,16 +575,16 @@ public class MainFrame extends JFrame{
     private void finishRecording(Microphone microphone) {
         voiceCaptureLabel.setText("Нажмите пробел для начала записи");
         recording = false;
+        microphone.isRunning = false;
+        //microphone.stop();
 
-        microphone.stop();
+        try {
 
-        //soundCaptureThread.interrupt();
-                    /*try {
-                        Thread.sleep(500);
-                        soundCaptureThread.isAlive();
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }*/
+            soundCaptureThread.join(0);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         if (tabbedPane1.getSelectedIndex() == 0) {
             //while (soundCaptureThread.isAlive()) {}
@@ -619,6 +625,10 @@ public class MainFrame extends JFrame{
             try {
                 IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
                 IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                Border b = BorderFactory.createTitledBorder("Результат идентификации: " + p.getName());
+                IdentifiedFacePanel.setBorder(b);
+                IdentifiedFacePanel.revalidate();
+                IdentifiedFacePanel.repaint();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
