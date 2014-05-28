@@ -10,7 +10,6 @@ import PMBPI.Voice.Microphone;
 import PMBPI.Voice.VoiceMain;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
-import com.sun.javafx.collections.annotations.ReturnsUnmodifiableCollection;
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.RealVector;
 import org.apache.log4j.BasicConfigurator;
@@ -18,6 +17,8 @@ import org.apache.log4j.BasicConfigurator;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 public class MainFrame extends JFrame{
     private JPanel topPanel;
     private JPanel MainPanel;
-    private JTabbedPane tabbedPane1;
+    private JTabbedPane datasetViewPane;
     private JPanel CameraPlace;
     private JButton selectFaceForIdentificationBtn;
     private JPanel IdentifiedFacePanel;
@@ -53,6 +54,7 @@ public class MainFrame extends JFrame{
     private JPanel selectedDataPanel;
     private JButton startCustomIdentificationBtn;
     private JButton recordingBtn;
+    private JPanel datasetPanel;
     private JLabel identifiedPersonNameLabel;
     static final int CAM_DIM_WIDTH = 176;
     static final int CAM_DIM_HEIGHT = 144;
@@ -113,7 +115,7 @@ public class MainFrame extends JFrame{
                     if (e.getKeyChar() == ' ') {
                         voiceCaptureLabel.setText("Идет запись");
                         recording = true;
-                        if (tabbedPane1.getSelectedIndex() == 0){
+                        if (datasetViewPane.getSelectedIndex() == 0){
                             microphone = new Microphone("data/tempSample.wav");
                             downCounter = 0;
                             soundCaptureThread = new Thread(new Runnable() {
@@ -127,7 +129,7 @@ public class MainFrame extends JFrame{
                             //microphone.start();
                             soundCaptureThread.start();
 
-                        } else if (tabbedPane1.getSelectedIndex() == 1) {
+                        } else if (datasetViewPane.getSelectedIndex() == 1) {
                             microphone = new Microphone("data/tmp" + newPersonVoiceIndex + ".wav");
                             soundCaptureThread = new Thread(new Runnable() {
                                 @Override
@@ -154,7 +156,7 @@ public class MainFrame extends JFrame{
                             e1.printStackTrace();
                         }*/
 
-                        if (tabbedPane1.getSelectedIndex() == 0) {
+                        if (datasetViewPane.getSelectedIndex() == 0) {
                             //while (soundCaptureThread.isAlive()) {}
                             double[] d;
                             try {
@@ -197,7 +199,7 @@ public class MainFrame extends JFrame{
                                 e1.printStackTrace();
                             }
 
-                        } else if (tabbedPane1.getSelectedIndex() == 1) {
+                        } else if (datasetViewPane.getSelectedIndex() == 1) {
                             double[] d = null;
                             try {
                                 d = VoiceMain.getCentroidOfRecording("data/tmp" + newPersonVoiceIndex + ".wav", DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
@@ -527,7 +529,7 @@ public class MainFrame extends JFrame{
                 if (!recording) {
                     voiceCaptureLabel.setText("Идет запись");
                     recording = true;
-                    if (tabbedPane1.getSelectedIndex() == 0){
+                    if (datasetViewPane.getSelectedIndex() == 0){
                         microphone = new Microphone("data/tempSample.wav");
                         downCounter = 0;
                         soundCaptureThread = new Thread(new Runnable() {
@@ -541,7 +543,7 @@ public class MainFrame extends JFrame{
                         //microphone.start();
                         soundCaptureThread.start();
 
-                    } else if (tabbedPane1.getSelectedIndex() == 1) {
+                    } else if (datasetViewPane.getSelectedIndex() == 1) {
                         microphone = new Microphone("data/tmp" + newPersonVoiceIndex + ".wav");
                         soundCaptureThread = new Thread(new Runnable() {
                             @Override
@@ -571,6 +573,24 @@ public class MainFrame extends JFrame{
                 }
             }
         });
+        datasetViewPane.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (((JTabbedPane)e.getSource()).getSelectedIndex() == 2) {
+                   datasetPanel.setLayout(new GridLayout(dataHolder.getPeople().size(), 2));
+                    for (Person p : dataHolder.getPeople()) {
+                        try {
+                            datasetPanel.add(new PreviewPanel(p.getUserPic()));
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        datasetPanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                    }
+                    datasetPanel.revalidate();
+                    datasetPanel.repaint();
+                }
+            }
+        });
     }
     private void finishRecording(Microphone microphone) {
         voiceCaptureLabel.setText("Нажмите пробел для начала записи");
@@ -586,7 +606,7 @@ public class MainFrame extends JFrame{
             e.printStackTrace();
         }
 
-        if (tabbedPane1.getSelectedIndex() == 0) {
+        if (datasetViewPane.getSelectedIndex() == 0) {
             //while (soundCaptureThread.isAlive()) {}
             double[] d;
             try {
@@ -633,7 +653,7 @@ public class MainFrame extends JFrame{
                 e1.printStackTrace();
             }
 
-        } else if (tabbedPane1.getSelectedIndex() == 1) {
+        } else if (datasetViewPane.getSelectedIndex() == 1) {
             double[] d = null;
             try {
                 d = VoiceMain.getCentroidOfRecording("data/tmp" + newPersonVoiceIndex + ".wav", DataHolder.VOICE_SAMPLE_PER_FRAME, DataHolder.VOICE_SAMPLING_RATE);
@@ -731,7 +751,7 @@ public class MainFrame extends JFrame{
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (tabbedPane1.getSelectedIndex() == 0) {
+                    if (datasetViewPane.getSelectedIndex() == 0) {
 
                         try {
                             selectedDataPanel.remove(selectedFaceForIdentification);
@@ -742,7 +762,7 @@ public class MainFrame extends JFrame{
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
-                    } else if (tabbedPane1.getSelectedIndex() == 1) {
+                    } else if (datasetViewPane.getSelectedIndex() == 1) {
                         try {
                             newPersonImagesPanel.remove(PreviewPanel.this);
                             newPersonImagesPanel.revalidate();
@@ -799,14 +819,14 @@ public class MainFrame extends JFrame{
             addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (tabbedPane1.getSelectedIndex() == 0) {
+                    if (datasetViewPane.getSelectedIndex() == 0) {
                         selectedDataPanel.remove(selectedVoiceForIdentification);
                         selectedVoiceForIdentification = null;
                         selectedVoiceCepstras = null;
                         selectedTestingVoice = null;
                         selectedDataPanel.revalidate();
                         selectedDataPanel.repaint();
-                    } else if (tabbedPane1.getSelectedIndex() == 1) {
+                    } else if (datasetViewPane.getSelectedIndex() == 1) {
                         try {
                             newPersonVoicesPanel.remove(CepstraPreviewPanel.this);
                             newPersonCepstras.remove(connectedCepstras);
