@@ -3,7 +3,7 @@ package PMBPI.Support;
 import PMBPI.Face.Eigenface;
 import PMBPI.Face.ImageProcessor;
 import PMBPI.Voice.VoiceMain;
-import com.sun.media.imageio.plugins.pnm.PNMImageWriteParam;
+
 import javafx.scene.chart.XYChart;
 
 import javax.imageio.ImageIO;

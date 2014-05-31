@@ -23,7 +23,8 @@ public class Microphone {
         wavFile = new File(file);
         try {
             dataLine = (TargetDataLine) AudioSystem.getLine(info);
-            dataLine.open(format);
+            if (!dataLine.isOpen())
+                dataLine.open(format);
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
@@ -64,6 +65,12 @@ public class Microphone {
         AudioInputStream outputAIS = new AudioInputStream(bais, format, audioData.length/format.getFrameSize());
         try {
             AudioSystem.write(outputAIS, AudioFileFormat.Type.WAVE, wavFile);
+            bais.close();
+            outputAIS.close();
+            dataLine.flush();
+            dataLine.stop();
+            dataLine.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

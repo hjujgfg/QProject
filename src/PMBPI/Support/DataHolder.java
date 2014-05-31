@@ -176,9 +176,7 @@ public class DataHolder implements Serializable{
         for (String s : faces) {
             p.addFace(s);
         }
-        int [][] matr = collectFaceMatrix();
-        TrainingDataHolder tdh = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
-        tdh.save();
+
         double[][] doubles = new double[voices.size()][];
         int i = 0;
         for (double[] d : voices) {
@@ -189,6 +187,9 @@ public class DataHolder implements Serializable{
         p.addVoice(centroid);
         p.setUserPic(new File(faces[0]));
         people.add(p);
+        int [][] matr = collectFaceMatrix();
+        TrainingDataHolder tdh = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
+        tdh.save();
         return DataHolder.SUCCESS;
     }
 
@@ -253,9 +254,10 @@ public class DataHolder implements Serializable{
         p.clearData();
         people.remove(p);
         int[][] matr = collectFaceMatrix();
-        int res = writeFaceMatrix(matr);
-
-        return res;
+        TrainingDataHolder tdh = Eigenface.train(matr, IMG_WIDTH, IMG_HEIGHT);
+        tdh.save();
+        //int res = writeFaceMatrix(matr);
+        return SUCCESS;
     }
 
     public int setIMGDimensions(int width, int height) {

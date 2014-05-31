@@ -254,35 +254,7 @@ public class MainFrame extends JFrame{
 
         IdentifiedFacePanel.setLayout(new GridBagLayout());
         realTimeIdentificationThreadIsRunning = true;
-        realTimeFaceIdentificationThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (realTimeIdentificationThreadIsRunning){
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        BufferedImage image = webcam.getImage();
-                        ImageProcessor processor = new ImageProcessor();
-                        image = processor.rescaleImageBrightness(image, 1.3f, 15);
-                        BufferedImage gray = processor.convertToGrayScale(image);
-                        Person p = dataHolder.identifyByImage(gray);
-                        IdentifiedFacePanel.removeAll();
-                        IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
-                        IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
-                        Border b = BorderFactory.createTitledBorder("Результат идентификации: " + p.getName());
-                        IdentifiedFacePanel.setBorder(b);
-                        IdentifiedFacePanel.revalidate();
-                        IdentifiedFacePanel.repaint();
-                    }
-                } catch (Exception e ) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
+        realTimeFaceIdentificationThread = new Thread(new RealTimeIdentification());
         realTimeFaceIdentificationThread.start();
 
         /*dataSetPanel.setLayout(new GridBagLayout());
@@ -510,7 +482,15 @@ public class MainFrame extends JFrame{
 
                     }
                 }
+                realTimeIdentificationThreadIsRunning = false;
                 dataHolder.addPerson(name, newImages, newPersonCepstras);
+                realTimeIdentificationThreadIsRunning = true;
+                realTimeFaceIdentificationThread = new Thread(new RealTimeIdentification());
+                try {
+                    realTimeFaceIdentificationThread.start();
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 newPersonImagesPanel.removeAll();
                 newPersonVoicesPanel.revalidate();
                 newPersonImagesPanel.repaint();
@@ -577,20 +557,56 @@ public class MainFrame extends JFrame{
             @Override
             public void stateChanged(ChangeEvent e) {
                 if (((JTabbedPane)e.getSource()).getSelectedIndex() == 2) {
-                   datasetPanel.setLayout(new GridLayout(dataHolder.getPeople().size(), 2));
-                    for (Person p : dataHolder.getPeople()) {
-                        try {
-                            datasetPanel.add(new PreviewPanel(p.getUserPic()));
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        datasetPanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
-                    }
-                    datasetPanel.revalidate();
-                    datasetPanel.repaint();
+
+                    repaintDataSet();
                 }
             }
         });
+    }
+    private class RealTimeIdentification implements Runnable{
+
+        @Override
+        public void run() {
+            try {
+                while (realTimeIdentificationThreadIsRunning){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    BufferedImage image = webcam.getImage();
+                    ImageProcessor processor = new ImageProcessor();
+                    image = processor.rescaleImageBrightness(image, 1.3f, 15);
+                    BufferedImage gray = processor.convertToGrayScale(image);
+                    Person p = dataHolder.identifyByImage(gray);
+                    IdentifiedFacePanel.removeAll();
+                    IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
+                    IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+                    Border b = BorderFactory.createTitledBorder("Результат идентификации: " + p.getName());
+                    IdentifiedFacePanel.setBorder(b);
+                    IdentifiedFacePanel.revalidate();
+                    IdentifiedFacePanel.repaint();
+                }
+            } catch (Exception e ) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private void repaintDataSet() {
+        datasetPanel.setLayout(new GridLayout(dataHolder.getPeople().size(), 2));
+        datasetPanel.removeAll();
+        for (Person p : dataHolder.getPeople()) {
+            try {
+                PreviewPanel panel = new PreviewPanel(p.getUserPic());
+                panel.personForDataset = p;
+                datasetPanel.add(panel);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            datasetPanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
+        }
+        datasetPanel.revalidate();
+        datasetPanel.repaint();
     }
     private void finishRecording(Microphone microphone) {
         voiceCaptureLabel.setText("Нажмите пробел для начала записи");
@@ -729,6 +745,7 @@ public class MainFrame extends JFrame{
 
         private BufferedImage image;
         File pathToImage;
+        public Person personForDataset;
         public File getPathToImage() {
             return pathToImage;
         }
@@ -767,6 +784,19 @@ public class MainFrame extends JFrame{
                             newPersonImagesPanel.remove(PreviewPanel.this);
                             newPersonImagesPanel.revalidate();
                             newPersonImagesPanel.repaint();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    } else if (datasetViewPane.getSelectedIndex() == 2) {
+                        try {
+                            realTimeIdentificationThreadIsRunning = false;
+                            //realTimeFaceIdentificationThread.join();
+                            realTimeFaceIdentificationThread = null;
+                            dataHolder.removePerson(personForDataset);
+                            realTimeIdentificationThreadIsRunning = true;
+                            realTimeFaceIdentificationThread = new Thread(new RealTimeIdentification());
+                            realTimeFaceIdentificationThread.start();
+                            repaintDataSet();
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         }
