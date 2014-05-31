@@ -359,6 +359,7 @@ public class DataHolder implements Serializable{
     }
 
     public Person identify(String face, double[] testCentroid) {
+        if (people.size() == 0) return null;
         TrainingDataHolder saved = TrainingDataHolder.load();
         ImageProcessor processor = new ImageProcessor();
         int[] testing  = processor.readFaceFromFile(face, IMG_WIDTH, IMG_HEIGHT);
@@ -393,6 +394,7 @@ public class DataHolder implements Serializable{
     }
 
     public Person identifyByImage(BufferedImage image) {
+        if (people.size() == 0) return null;
         ImageProcessor processor = new ImageProcessor();
         int[] face = processor.extractInnerImage(image, IMG_WIDTH, IMG_HEIGHT);
         //int [] face = processor.robustReadBufferedImage(image, IMG_WIDTH, IMG_HEIGHT);

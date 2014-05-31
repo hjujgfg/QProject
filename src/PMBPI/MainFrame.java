@@ -26,6 +26,9 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -61,7 +64,7 @@ public class MainFrame extends JFrame{
     static final int PREFERRED_SIZE_W = 92;
     static final int PREFERRED_SIZE_H = 112;
 
-    final Webcam webcam;
+    Webcam webcam;
     DataHolder dataHolder;
     Thread realTimeFaceIdentificationThread;
     boolean realTimeIdentificationThreadIsRunning;
@@ -79,11 +82,13 @@ public class MainFrame extends JFrame{
     Microphone microphone;
     int downCounter;
     Thread countDown;
+    boolean webCamIsAccessible;
     public MainFrame() {
         super("PMBPI Project");
         BasicConfigurator.configure();
         setContentPane(MainPanel);
         pack();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -103,8 +108,12 @@ public class MainFrame extends JFrame{
         newPersonVoicesPanel.setLayout(new GridBagLayout());
         recording = false;
         //recordingBtn.setEnabled(false);
-
-        voiceCaptureLabel.requestFocus();
+        Path path = Paths.get("data/");
+        if (!Files.exists(path)) {
+            File f = new File("data/");
+            f.mkdir();
+        }
+        //voiceCaptureLabel.requestFocus();
         voiceCaptureLabel.addKeyListener(new KeyListener() {
 
 
@@ -236,19 +245,33 @@ public class MainFrame extends JFrame{
         dataHolder = DataHolder.restore();
         if (dataHolder == null) {
             dataHolder = new DataHolder();
-            trainDataHolder(dataHolder);
+            Path facePath = Paths.get("faces/");
+            Path voicePath = Paths.get("audio_data/16khz_16bit/");
+            if (Files.exists(facePath) && Files.exists(voicePath)) {
+                trainDataHolder(dataHolder);
+            } else {
+                JOptionPane.showMessageDialog(MainFrame.this, "Нет файлов для автоматического обучения");
+            }
         }
         dataHolder.setIMGDimensions(92, 112);
         dataHolder.setSoundCapureParams(16, 16000);
         //mic = new Microphone("data/~tmp.wav");
-        webcam = Webcam.getDefault();
+        try {
+            webcam = Webcam.getDefault();
 
-        webcam.setViewSize(new Dimension(176, 144));
-        CameraPlace.setLayout(new GridBagLayout());
-        final WebcamPanel webcamPanel = new WebcamPanel(webcam, new Dimension(176, 144), true);
-        MyWebCamPainter painter = new MyWebCamPainter();
-        webcamPanel.setPainter(painter);
-        CameraPlace.add(webcamPanel);
+            webcam.setViewSize(new Dimension(176, 144));
+            CameraPlace.setLayout(new GridBagLayout());
+            final WebcamPanel webcamPanel = new WebcamPanel(webcam, new Dimension(176, 144), true);
+            MyWebCamPainter painter = new MyWebCamPainter();
+            webcamPanel.setPainter(painter);
+            CameraPlace.add(webcamPanel);
+            webCamIsAccessible = true;
+        }catch (Exception ex) {
+            webCamIsAccessible = false;
+            captureImageButton.setEnabled(false);
+            recordingBtn.setEnabled(false);
+            JOptionPane.showMessageDialog(MainFrame.this, "Нет доступа к периферийным устройствам");
+        }
 
         setVisible(true);
 
@@ -568,6 +591,7 @@ public class MainFrame extends JFrame{
         @Override
         public void run() {
             try {
+                if (!webCamIsAccessible) return;
                 while (realTimeIdentificationThreadIsRunning){
                     try {
                         Thread.sleep(1000);
@@ -579,6 +603,7 @@ public class MainFrame extends JFrame{
                     image = processor.rescaleImageBrightness(image, 1.3f, 15);
                     BufferedImage gray = processor.convertToGrayScale(image);
                     Person p = dataHolder.identifyByImage(gray);
+                    if (p == null) break;
                     IdentifiedFacePanel.removeAll();
                     IdentifiedFacePanel.add(new PreviewPanel(p.getUserPic()));
                     IdentifiedFacePanel.add(new CepstraPreviewPanel(p.getVoiceCentroids()[0], 200, 100));
