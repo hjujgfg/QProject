@@ -139,7 +139,7 @@ public class DataHolder implements Serializable{
     public Person enterpretResults (double[] results) {
         int facepn = personFacesNumbers.get((int)results[1]);
         int voicepn = personVoicesNumbers.get((int)results[3]);
-        if (results[0] > 15000000 || results[2] > 10) return null;
+        if (results[0] > 15000000 && results[2] > 10) return null;
         if (facepn == voicepn && results[2] <= 5 && results[0] <= 10000000) return people.get(voicepn);
         if (results[2] <= 5 && facepn == voicepn) return people.get(voicepn);
 

@@ -114,7 +114,7 @@ public class MainFrame extends JFrame{
             f.mkdir();
         }
         //voiceCaptureLabel.requestFocus();
-        voiceCaptureLabel.addKeyListener(new KeyListener() {
+        /*voiceCaptureLabel.addKeyListener(new KeyListener() {
 
 
 
@@ -158,12 +158,12 @@ public class MainFrame extends JFrame{
                         microphone.stop();
 
                         //soundCaptureThread.interrupt();
-                        /*try {
+                        *//*try {
                             Thread.sleep(500);
                             soundCaptureThread.isAlive();
                         } catch (InterruptedException e1) {
                             e1.printStackTrace();
-                        }*/
+                        }*//*
 
                         if (datasetViewPane.getSelectedIndex() == 0) {
                             //while (soundCaptureThread.isAlive()) {}
@@ -240,7 +240,7 @@ public class MainFrame extends JFrame{
             public void keyReleased(KeyEvent e) {
 
             }
-        });
+        });*/
         newPersonCepstras = new ArrayList<double[]>();
         dataHolder = DataHolder.restore();
         if (dataHolder == null) {
@@ -355,7 +355,7 @@ public class MainFrame extends JFrame{
                 try {
                     BufferedImage image = webcam.getImage();
                     ImageProcessor processor = new ImageProcessor();
-                    image = processor.rescaleImageBrightness(image, 1.35f, 15);
+                    image = processor.rescaleImageBrightness(image, 1.35f, 10);
                     image = processor.convertToGrayScale(image);
                     int [] res = processor.extractInnerImage(image, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT);
                     Eigenface.writeToPGM(res, DataHolder.IMG_WIDTH, DataHolder.IMG_HEIGHT, "data/temp" + newPersonImageIndex+".pgm");
@@ -600,7 +600,7 @@ public class MainFrame extends JFrame{
                     }
                     BufferedImage image = webcam.getImage();
                     ImageProcessor processor = new ImageProcessor();
-                    image = processor.rescaleImageBrightness(image, 1.3f, 15);
+                    image = processor.rescaleImageBrightness(image, 1.3f, 10);
                     BufferedImage gray = processor.convertToGrayScale(image);
                     Person p = dataHolder.identifyByImage(gray);
                     if (p == null) break;
